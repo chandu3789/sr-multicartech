@@ -1,0 +1,389 @@
+// Prisma Schema for SR Multi Car Tech Platform
+// Configured for PostgreSQL (deployable on Supabase, Neon, AWS RDS, etc.)
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  CUSTOMER
+  ADMIN
+  TECHNICIAN
+  WORKSHOP_MANAGER
+}
+
+enum ServiceType {
+  WORKSHOP
+  DOORSTEP
+  PICKUP_DROP
+}
+
+enum BookingStage {
+  CONFIRMED
+  VEHICLE_RECEIVED
+  INSPECTION_STARTED
+  SERVICE_IN_PROGRESS
+  QUALITY_CHECK
+  READY_FOR_DELIVERY
+  COMPLETED
+  CANCELLED
+}
+
+enum PaymentStatus {
+  PENDING
+  PAID
+  FAILED
+  REFUNDED
+}
+
+enum PaymentMethod {
+  UPI
+  CREDIT_CARD
+  DEBIT_CARD
+  NET_BANKING
+  WALLET
+  PAY_AT_WORKSHOP
+  PAY_LATER
+}
+
+model User {
+  id            String         @id @default(uuid())
+  email         String?        @unique
+  phone         String         @unique
+  name          String?
+  role          Role           @default(CUSTOMER)
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  customer      Customer?
+  technician    Technician?
+  notifications Notification[]
+}
+
+model Customer {
+  id          String          @id @default(uuid())
+  userId      String          @unique
+  user        User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  addresses   Address[]
+  vehicles    Vehicle[]
+  bookings    Booking[]
+  reviews     Review[]
+  tickets     SupportTicket[]
+  createdAt   DateTime        @default(now())
+  updatedAt   DateTime        @updatedAt
+}
+
+model Address {
+  id          String    @id @default(uuid())
+  customerId  String
+  customer    Customer  @relation(fields: [customerId], references: [id], onDelete: Cascade)
+  tag         String    @default("Home") // Home, Work, Other
+  flatHouse   String
+  street      String
+  area        String
+  city        String
+  state       String?
+  pincode     String
+  latitude    Float?
+  longitude   Float?
+  isDefault   Boolean   @default(false)
+  createdAt   DateTime  @default(now())
+  bookings    Booking[]
+}
+
+model CarBrand {
+  id        String     @id @default(uuid())
+  name      String     @unique // e.g. Maruti Suzuki, Hyundai, Tata
+  slug      String     @unique
+  logoUrl   String?
+  popular   Boolean    @default(true)
+  order     Int        @default(0)
+  models    CarModel[]
+}
+
+model CarModel {
+  id        String       @id @default(uuid())
+  brandId   String
+  brand     CarBrand     @relation(fields: [brandId], references: [id], onDelete: Cascade)
+  name      String       // e.g. Creta, Swift, Nexon
+  slug      String
+  imageUrl  String?
+  bodyType  String?      // Hatchback, Sedan, SUV, etc.
+  variants  CarVariant[]
+  vehicles  Vehicle[]
+
+  @@unique([brandId, name])
+}
+
+model CarVariant {
+  id        String    @id @default(uuid())
+  modelId   String
+  model     CarModel  @relation(fields: [modelId], references: [id], onDelete: Cascade)
+  fuelType  String    // Petrol, Diesel, CNG, Electric, Hybrid
+  yearStart Int?
+  yearEnd   Int?
+  engineCc  String?
+  vehicles  Vehicle[]
+}
+
+model Vehicle {
+  id             String      @id @default(uuid())
+  customerId     String
+  customer       Customer    @relation(fields: [customerId], references: [id], onDelete: Cascade)
+  modelId        String
+  model          CarModel    @relation(fields: [modelId], references: [id])
+  variantId      String?
+  variant        CarVariant? @relation(fields: [variantId], references: [id])
+  registrationNo String?     // e.g. AS-01-AB-1234
+  manufactureYear Int?
+  fuelType       String
+  odometerReading Int?
+  createdAt      DateTime    @default(now())
+  bookings       Booking[]
+}
+
+model ServiceCategory {
+  id          String    @id @default(uuid())
+  name        String    @unique // e.g. Periodic Car Service, AC Service
+  slug        String    @unique
+  shortDesc   String
+  iconName    String
+  startingPrice Float
+  order       Int       @default(0)
+  services    Service[]
+}
+
+model Service {
+  id              String          @id @default(uuid())
+  categoryId      String
+  category        ServiceCategory @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  title           String          // e.g. Comprehensive Car Service
+  slug            String          @unique
+  tagline         String?
+  description     String
+  startingPrice   Float
+  discountedPrice Float?
+  estimatedHours  Float
+  warrantyPeriod  String?         // e.g. "6 Months or 5,000 km"
+  recommendedKm   String?         // e.g. "Every 10,000 km / 1 Year"
+  whatsIncluded   String[]        // Array of inspection check items
+  whatsNotIncluded String[]
+  imageUrl        String?
+  popular         Boolean         @default(false)
+  doorstepAllowed Boolean         @default(true)
+  pickupAllowed   Boolean         @default(true)
+  packages        ServicePackage[]
+  bookings        Booking[]
+  reviews         Review[]
+}
+
+model ServicePackage {
+  id          String   @id @default(uuid())
+  serviceId   String
+  service     Service  @relation(fields: [serviceId], references: [id], onDelete: Cascade)
+  name        String   // Basic, Standard, Comprehensive, Premium
+  price       Float
+  details     String[]
+}
+
+model Workshop {
+  id          String       @id @default(uuid())
+  name        String       // e.g. SR Multi Car Tech - Central Hub
+  slug        String       @unique
+  address     String
+  area        String
+  city        String
+  pincode     String
+  phone       String
+  email       String?
+  rating      Float        @default(4.8)
+  reviewCount Int          @default(120)
+  openTime    String       @default("08:30 AM")
+  closeTime   String       @default("08:00 PM")
+  latitude    Float?
+  longitude   Float?
+  technicians Technician[]
+  bookings    Booking[]
+}
+
+model Technician {
+  id         String    @id @default(uuid())
+  userId     String    @unique
+  user       User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  workshopId String?
+  workshop   Workshop? @relation(fields: [workshopId], references: [id])
+  name       String
+  phone      String
+  experienceYears Int  @default(5)
+  specialty  String    @default("Master Diagnostic & Engine Specialist")
+  photoUrl   String?
+  rating     Float     @default(4.9)
+  bookings   Booking[]
+}
+
+model Booking {
+  id              String         @id @default(uuid())
+  bookingNumber   String         @unique // e.g. SRMCT-2026-90812
+  customerId      String
+  customer        Customer       @relation(fields: [customerId], references: [id])
+  vehicleId       String?
+  vehicle         Vehicle?       @relation(fields: [vehicleId], references: [id])
+  carDetails      String         // Stored string: "Hyundai Creta - Petrol (2022)"
+  serviceId       String
+  service         Service        @relation(fields: [serviceId], references: [id])
+  serviceType     ServiceType    @default(PICKUP_DROP)
+  stage           BookingStage   @default(CONFIRMED)
+  addressId       String?
+  address         Address?       @relation(fields: [addressId], references: [id])
+  serviceAddress  String?        // Full plain address snapshot
+  scheduledDate   DateTime
+  timeSlot        String         // e.g. "10:00 AM - 11:00 AM"
+  workshopId      String?
+  workshop        Workshop?      @relation(fields: [workshopId], references: [id])
+  technicianId    String?
+  technician      Technician?    @relation(fields: [technicianId], references: [id])
+  technicianNotes String?
+  basePrice       Float
+  additionalCharges Float        @default(0)
+  discountAmount  Float          @default(0)
+  gstAmount       Float          @default(0)
+  totalAmount     Float
+  couponCode      String?
+  customerNotes   String?
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @updatedAt
+  statusHistory   BookingStatus[]
+  payment         Payment?
+  invoice         Invoice?
+}
+
+model BookingStatus {
+  id          String       @id @default(uuid())
+  bookingId   String
+  booking     Booking      @relation(fields: [bookingId], references: [id], onDelete: Cascade)
+  stage       BookingStage
+  title       String
+  description String?
+  timestamp   DateTime     @default(now())
+}
+
+model Payment {
+  id            String        @id @default(uuid())
+  bookingId     String        @unique
+  booking       Booking       @relation(fields: [bookingId], references: [id], onDelete: Cascade)
+  amount        Float
+  method        PaymentMethod @default(UPI)
+  status        PaymentStatus @default(PENDING)
+  transactionId String?
+  gatewayRef    String?       // Razorpay payment ID / order ID
+  paidAt        DateTime?
+  createdAt     DateTime      @default(now())
+}
+
+model Invoice {
+  id            String    @id @default(uuid())
+  bookingId     String    @unique
+  booking       Booking   @relation(fields: [bookingId], references: [id], onDelete: Cascade)
+  invoiceNumber String    @unique // e.g. INV-SRMCT-2026-0045
+  subtotal      Float
+  taxGst        Float
+  discount      Float
+  total         Float
+  issuedAt      DateTime  @default(now())
+  pdfUrl        String?
+}
+
+model Coupon {
+  id              String    @id @default(uuid())
+  code            String    @unique // e.g. SRFIRST10
+  title           String
+  description     String
+  discountType    String    // PERCENTAGE or FIXED
+  discountValue   Float
+  minOrderAmount  Float     @default(0)
+  maxDiscount     Float?
+  validUntil      DateTime
+  isActive        Boolean   @default(true)
+  usageLimit      Int?
+  timesUsed       Int       @default(0)
+}
+
+model Review {
+  id          String    @id @default(uuid())
+  customerId  String
+  customer    Customer  @relation(fields: [customerId], references: [id])
+  serviceId   String?
+  service     Service?  @relation(fields: [serviceId], references: [id])
+  rating      Int       @default(5)
+  comment     String
+  carModel    String?   // e.g. "Hyundai Creta"
+  city        String?   @default("Guwahati")
+  isVerified  Boolean   @default(true)
+  createdAt   DateTime  @default(now())
+}
+
+model SupportTicket {
+  id          String    @id @default(uuid())
+  customerId  String?
+  customer    Customer? @relation(fields: [customerId], references: [id])
+  name        String
+  phone       String
+  email       String?
+  type        String    // EMERGENCY_SOS, GENERAL_INQUIRY, BOOKING_QUERY
+  subject     String
+  message     String
+  status      String    @default("OPEN") // OPEN, IN_PROGRESS, RESOLVED
+  location    String?
+  vehicleInfo String?
+  createdAt   DateTime  @default(now())
+}
+
+model BlogPost {
+  id          String    @id @default(uuid())
+  slug        String    @unique
+  title       String
+  excerpt     String
+  content     String
+  category    String    // Maintenance, Car Spa, AC, Tips
+  coverImage  String?
+  authorName  String    @default("SR Multi Car Tech Team")
+  readTime    String    @default("4 min read")
+  published   Boolean   @default(true)
+  createdAt   DateTime  @default(now())
+}
+
+model FAQ {
+  id        String   @id @default(uuid())
+  category  String   // General, Service, Booking, Warranty, Billing
+  question  String
+  answer    String
+  order     Int      @default(0)
+}
+
+model Offer {
+  id          String    @id @default(uuid())
+  title       String
+  badge       String    // "HOT DEAL", "LIMITED TIME", "POPULAR"
+  description String
+  discount    String    // e.g. "20% OFF", "₹999 OFF"
+  couponCode  String
+  validity    String
+  serviceSlug String?
+  bannerImage String?
+}
+
+model Setting {
+  id          String   @id @default("1")
+  brandName   String   @default("SR Multi Car Tech")
+  tagline     String   @default("Complete Car Care. One Trusted Place.")
+  phone       String   @default("+91 98765 43210")
+  whatsapp    String   @default("+91 98765 43210")
+  sosPhone    String   @default("+91 98765 99999")
+  email       String   @default("care@srmulticartech.com")
+  mainCity    String   @default("Guwahati")
+  address     String   @default("Plot 42, Auto Hub Road, NH-27, Guwahati, Assam 781034")
+}
