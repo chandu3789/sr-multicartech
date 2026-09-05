@@ -25,7 +25,11 @@ export default function QuickBookingWidget() {
   const activeBrandObj = CAR_BRANDS.find(b => b.name === selectedBrand) || CAR_BRANDS[1];
   const availableModels = activeBrandObj.models;
   const activeModelObj = availableModels.find(m => m.name === selectedModel) || availableModels[0];
-  const availableFuels = activeModelObj ? activeModelObj.fuels : ['Petrol', 'Diesel'];
+  const availableFuels = activeModelObj ? (
+    activeModelObj.bodyType === 'EV'
+      ? ['Electric']
+      : Array.from(new Set([...activeModelObj.fuels, 'Petrol', 'Diesel', 'CNG + Petrol']))
+  ) : ['Petrol', 'Diesel', 'CNG + Petrol'];
 
   // Handle default date (tomorrow)
   useEffect(() => {
@@ -42,7 +46,7 @@ export default function QuickBookingWidget() {
     const b = CAR_BRANDS.find(item => item.name === brandName);
     if (b && b.models.length > 0) {
       setSelectedModel(b.models[0].name);
-      setSelectedFuel(b.models[0].fuels[0]);
+      setSelectedFuel(b.models[0].fuels[0] || 'Petrol');
     }
   };
 
@@ -74,46 +78,46 @@ export default function QuickBookingWidget() {
     <div className="w-full bg-white rounded-3xl shadow-xl shadow-slate-900/10 border border-slate-200/80 p-6 md:p-8 backdrop-blur-sm relative z-20">
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 mb-6 border-b border-slate-100">
         <div>
-          <span className="text-xs font-bold uppercase tracking-wider text-rose-600 bg-rose-50 px-3 py-1 rounded-full border border-rose-100">
-            Quick 60-Second Booking
+          <span className="text-xs font-bold text-rose-600 uppercase tracking-wider flex items-center gap-1.5">
+            <span className="w-2 h-2 rounded-full bg-rose-600 animate-ping"></span>
+            60-Second Instant Service Scheduler
           </span>
-          <h3 className="text-xl md:text-2xl font-extrabold text-slate-900 mt-2">
-            Book Your Car Service
+          <h3 className="text-xl md:text-2xl font-black text-slate-900 mt-1">
+            Book Certified Car Service at Doorstep or Workshop
           </h3>
-          <p className="text-xs text-slate-500 mt-0.5">
-            Select your car, pick a service package, and get instant transparent pricing.
-          </p>
         </div>
 
-        <div className="flex items-center gap-2 text-xs font-semibold text-slate-600 bg-slate-50 px-3 py-2 rounded-xl border border-slate-100">
-          <CheckCircle2 className="w-4 h-4 text-emerald-600 flex-shrink-0" />
-          <span>Free Doorstep Pickup & Drop Included</span>
+        <div className="flex items-center gap-3">
+          <div className="flex items-center gap-1.5 text-xs text-slate-500 bg-slate-50 px-3 py-1.5 rounded-full border border-slate-200">
+            <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
+            <span>Free Doorstep Pickup & Drop</span>
+          </div>
         </div>
       </div>
 
       <form onSubmit={handleProceed} className="space-y-6">
-        {/* Step 1 & 2: Car Brand & Model */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        {/* Step 1, 2, 3: Car Selection Bar */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {/* Brand Selector */}
           <div>
             <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5 flex items-center gap-1.5">
               <Car className="w-3.5 h-3.5 text-rose-600" />
-              1. Select Brand
+              1. Car Manufacturer
             </label>
             <select
               value={selectedBrand}
               onChange={(e) => handleBrandChange(e.target.value)}
               className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-slate-50 text-slate-900 text-sm font-semibold focus:bg-white focus:border-rose-600 focus:ring-1 focus:ring-rose-600 outline-none transition-all cursor-pointer"
             >
-              {CAR_BRANDS.map((brand) => (
-                <option key={brand.id} value={brand.name}>
-                  {brand.name}
+              {CAR_BRANDS.map((b) => (
+                <option key={b.id} value={b.name}>
+                  {b.name} ({b.models.length} Models)
                 </option>
               ))}
             </select>
           </div>
 
-          {/* Model Selector */}
+          {/* Model Selector grouped by segment in order */}
           <div>
             <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5 flex items-center gap-1.5">
               <Car className="w-3.5 h-3.5 text-rose-600" />
@@ -150,7 +154,7 @@ export default function QuickBookingWidget() {
               <Wrench className="w-3.5 h-3.5 text-rose-600" />
               3. Fuel Type
             </label>
-            <div className="grid grid-cols-3 gap-1.5">
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-1.5">
               {availableFuels.map((fuel) => (
                 <button
                   key={fuel}
@@ -184,7 +188,7 @@ export default function QuickBookingWidget() {
             >
               {SERVICE_PACKAGES.map((s) => (
                 <option key={s.id} value={s.slug}>
-                  {s.title} — ₹{s.startingPrice}
+                  {s.title} — (Quote on Inspection / Coming Soon)
                 </option>
               ))}
             </select>
@@ -205,7 +209,7 @@ export default function QuickBookingWidget() {
           <div>
             <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5 flex items-center gap-1.5">
               <Calendar className="w-3.5 h-3.5 text-rose-600" />
-              6. Preferred Date & Time
+              6. Scheduled Date & Time
             </label>
             <div className="grid grid-cols-2 gap-2">
               <input
@@ -242,7 +246,7 @@ export default function QuickBookingWidget() {
             type="submit"
             className="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-rose-600 hover:bg-rose-700 text-white font-bold text-sm shadow-lg shadow-rose-600/25 hover:shadow-rose-600/40 hover:-translate-y-0.5 active:translate-y-0 transition-all flex items-center justify-center gap-2 group cursor-pointer"
           >
-            <span>Continue to Booking</span>
+            <span>Book Inspection (Pricing Coming Soon)</span>
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </button>
         </div>

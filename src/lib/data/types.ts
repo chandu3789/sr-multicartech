@@ -9,11 +9,13 @@ export interface CarBrand {
   models: CarModel[];
 }
 
+export type FuelType = 'Petrol' | 'Diesel' | 'CNG' | 'CNG + Petrol' | 'Electric' | 'Hybrid';
+
 export interface CarModel {
   id: string;
   name: string;
   bodyType: 'Hatchback' | 'Sedan' | 'SUV' | 'MUV' | 'Luxury' | 'EV' | 'Coupe';
-  fuels: ('Petrol' | 'Diesel' | 'CNG' | 'Electric' | 'Hybrid')[];
+  fuels: FuelType[];
   years: number[];
   popular?: boolean;
 }

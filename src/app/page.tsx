@@ -2,6 +2,7 @@ import HeroSection from '@/components/home/HeroSection';
 import PopularServices from '@/components/home/PopularServices';
 import ServiceCategoriesGrid from '@/components/home/ServiceCategoriesGrid';
 import SpecialOffers from '@/components/home/SpecialOffers';
+import OwnerSection from '@/components/home/OwnerSection';
 import WhyChooseUs from '@/components/home/WhyChooseUs';
 import HowItWorks from '@/components/home/HowItWorks';
 import BrandCarousel from '@/components/home/BrandCarousel';
@@ -23,10 +24,13 @@ export default function HomePage() {
       {/* 5. Service Categories Grid */}
       <ServiceCategoriesGrid />
 
-      {/* 6. Special Offers */}
+      {/* 6. Special Offers (Coming Soon) */}
       <SpecialOffers />
 
-      {/* 7. Why Choose SR Multi Car Tech */}
+      {/* 7. Founder & German Diagnostic Technology */}
+      <OwnerSection />
+
+      {/* 8. Why Choose SR Multi Car Tech */}
       <WhyChooseUs />
 
       {/* 8. How It Works (4 Steps) */}

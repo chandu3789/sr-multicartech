@@ -117,13 +117,13 @@ function BookingConfirmationContent() {
           {/* Amount Paid summary */}
           <div className="mt-4 p-4 rounded-2xl bg-emerald-50/60 border border-emerald-200 flex items-center justify-between text-left">
             <div>
-              <span className="text-[10px] font-bold uppercase text-emerald-800">Total Invoice Amount</span>
+              <span className="text-[10px] font-bold uppercase text-emerald-800">Payment Due Advance</span>
               <div className="text-xl font-black text-slate-900">
-                ₹{booking?.total || '4246'}
+                ₹0 <span className="text-xs font-semibold text-slate-500">(Quote Finalized After Diagnostic Scan)</span>
               </div>
             </div>
-            <span className="text-xs font-bold px-3 py-1 rounded-full bg-emerald-600 text-white">
-              {booking?.paymentStatus === 'PAID' ? '✓ Payment Received' : 'Pay After Service'}
+            <span className="text-xs font-bold px-3 py-1.5 rounded-full bg-emerald-600 text-white">
+              Zero Advance Required
             </span>
           </div>
 

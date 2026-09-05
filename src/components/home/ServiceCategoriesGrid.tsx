@@ -105,9 +105,9 @@ export default function ServiceCategoriesGrid() {
                 {/* Price & Action Link */}
                 <div className="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between">
                   <div>
-                    <span className="text-[10px] text-slate-400 font-semibold block uppercase">Starts at</span>
-                    <span className="text-sm font-black text-slate-900">
-                      {category.startingPrice === 0 ? 'Free Processing' : `₹${category.startingPrice}`}
+                    <span className="text-[10px] text-slate-400 font-bold block uppercase tracking-wider">Pricing</span>
+                    <span className="text-xs font-black text-rose-600">
+                      Coming Soon
                     </span>
                   </div>
 

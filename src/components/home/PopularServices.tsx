@@ -99,12 +99,11 @@ export default function PopularServices() {
                 {/* Price and Action Buttons */}
                 <div className="flex items-center justify-between pt-1">
                   <div>
-                    <div className="text-[10px] uppercase font-semibold text-slate-400">Starting from</div>
-                    <div className="flex items-baseline gap-1.5">
-                      <span className="text-2xl font-black text-slate-900">₹{service.startingPrice}</span>
-                      {service.originalPrice > service.startingPrice && (
-                        <span className="text-xs text-slate-400 line-through font-medium">₹{service.originalPrice}</span>
-                      )}
+                    <div className="text-[10px] uppercase font-bold text-slate-400 tracking-wider">Package Pricing</div>
+                    <div className="flex items-center gap-1.5 mt-0.5">
+                      <span className="text-xs font-black text-rose-600 px-2.5 py-1 rounded-lg bg-rose-50 border border-rose-200">
+                        Coming Soon
+                      </span>
                     </div>
                   </div>
 

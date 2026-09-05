@@ -315,7 +315,10 @@ function BookingFlowContent() {
                       onChange={(e) => setFuel(e.target.value)}
                       className="w-full p-3 rounded-xl border border-slate-200 bg-slate-50 text-sm font-semibold outline-none"
                     >
-                      {activeModelObj.fuels.map(f => (
+                      {(activeModelObj.bodyType === 'EV'
+                        ? ['Electric']
+                        : Array.from(new Set([...activeModelObj.fuels, 'Petrol', 'Diesel', 'CNG + Petrol']))
+                      ).map(f => (
                         <option key={f} value={f}>{f}</option>
                       ))}
                     </select>
@@ -371,8 +374,10 @@ function BookingFlowContent() {
                         </div>
 
                         <div className="text-right">
-                          <div className="font-black text-slate-900 text-base">₹{pkg.startingPrice}</div>
-                          <span className="text-[10px] text-emerald-600 font-semibold">Free Doorstep Pickup</span>
+                          <span className="text-xs font-black text-rose-600 px-2 py-0.5 rounded bg-rose-50 border border-rose-200">
+                            Quote Coming Soon
+                          </span>
+                          <span className="text-[10px] text-emerald-600 font-semibold block mt-0.5">Free Doorstep Pickup</span>
                         </div>
                       </div>
                     );
@@ -678,27 +683,37 @@ function BookingFlowContent() {
 
                 {/* Payment Mode Selection */}
                 <div>
-                  <h3 className="font-bold text-slate-900 text-sm mb-3">Select Payment Method</h3>
-                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                  <div className="flex items-center justify-between mb-3">
+                    <h3 className="font-bold text-slate-900 text-sm">Select Preferred Payment Mode</h3>
+                    <span className="text-[10px] font-bold text-rose-600 bg-rose-50 px-2 py-0.5 rounded border border-rose-200">
+                      Pricing Disclosed Post-Inspection
+                    </span>
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     {[
-                      { id: 'UPI', label: 'UPI (GPay / PhonePe / Paytm)' },
-                      { id: 'Credit Card', label: 'Credit / Debit Card' },
-                      { id: 'Net Banking', label: 'Net Banking' },
-                      { id: 'Wallet', label: 'Digital Wallets' },
-                      { id: 'Pay Later', label: 'Pay After Service' },
-                      { id: 'Pay at Workshop', label: 'Pay at Workshop' }
+                      { id: 'Pay Later', label: 'Pay After Inspection & Service', sub: 'Recommended • ₹0 advance, approve quote after diagnostic scan', popular: true },
+                      { id: 'Pay at Workshop', label: 'Pay at Workshop Counter', sub: 'Cash, UPI, or Card at car collection' },
+                      { id: 'UPI', label: 'UPI Post-Service (GPay / PhonePe)', sub: 'Instant digital invoice payment upon completion' },
+                      { id: 'Credit Card', label: 'Card / Net Banking upon Delivery', sub: 'Seamless digital transfer upon satisfaction' }
                     ].map((m) => (
                       <button
                         key={m.id}
                         type="button"
                         onClick={() => setPaymentMethod(m.id)}
-                        className={`p-3 rounded-xl border text-xs font-bold transition-all text-left ${
+                        className={`p-3.5 rounded-xl border text-xs font-bold transition-all text-left relative ${
                           paymentMethod === m.id
-                            ? 'bg-rose-50 border-rose-600 text-rose-700 ring-2 ring-rose-500/20'
+                            ? 'bg-rose-50 border-rose-600 text-rose-800 ring-2 ring-rose-500/20 shadow-sm'
                             : 'bg-white border-slate-200 hover:border-slate-300 text-slate-700'
                         }`}
                       >
-                        {m.label}
+                        {m.popular && (
+                          <span className="absolute top-2 right-2 text-[9px] font-black uppercase tracking-wider px-1.5 py-0.5 rounded bg-emerald-100 text-emerald-800">
+                            ZERO ADVANCE
+                          </span>
+                        )}
+                        <div className="font-bold text-sm text-slate-900">{m.label}</div>
+                        <div className="text-[11px] text-slate-500 font-normal mt-0.5">{m.sub}</div>
                       </button>
                     ))}
                   </div>
@@ -719,11 +734,11 @@ function BookingFlowContent() {
                     className="px-8 py-4 rounded-xl bg-rose-600 hover:bg-rose-700 text-white font-black text-sm shadow-xl shadow-rose-600/30 transition-all flex items-center gap-2 cursor-pointer disabled:opacity-50"
                   >
                     {isSubmitting ? (
-                      <span>Generating Booking...</span>
+                      <span>Reserving Service Bay...</span>
                     ) : (
                       <>
                         <CheckCircle2 className="w-5 h-5" />
-                        <span>Confirm Booking • ₹{finalTotal}</span>
+                        <span>Confirm Booking • ₹0 Advance (Pay After Service)</span>
                       </>
                     )}
                   </button>
@@ -734,9 +749,14 @@ function BookingFlowContent() {
 
           {/* Right Column: Live Price & Coupon Breakdown Card */}
           <div className="lg:col-span-4 bg-white rounded-3xl border border-slate-200 p-6 shadow-sm space-y-6">
-            <h3 className="font-bold text-slate-900 text-sm uppercase tracking-wider pb-3 border-b border-slate-100">
-              Price Breakdown
-            </h3>
+            <div className="flex items-center justify-between pb-3 border-b border-slate-100">
+              <h3 className="font-bold text-slate-900 text-sm uppercase tracking-wider">
+                Service Estimate
+              </h3>
+              <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-rose-50 text-rose-600 border border-rose-200">
+                Coming Soon
+              </span>
+            </div>
 
             {/* Selected Package Details */}
             <div className="text-xs space-y-1">
@@ -747,55 +767,45 @@ function BookingFlowContent() {
             {/* Line Items */}
             <div className="space-y-2.5 text-xs pt-2 border-t border-slate-100">
               <div className="flex items-center justify-between text-slate-600">
-                <span>Base Service Package</span>
-                <span className="font-bold text-slate-900">₹{basePrice}</span>
+                <span>Base Package Estimate</span>
+                <span className="font-bold text-rose-600">Coming Soon</span>
               </div>
 
               <div className="flex items-center justify-between text-slate-600">
                 <span>Doorstep Valet Pickup & Drop</span>
-                <span className="text-emerald-600 font-bold">FREE (₹0)</span>
+                <span className="text-emerald-600 font-bold">FREE (Complimentary)</span>
               </div>
 
-              {discountAmount > 0 && (
-                <div className="flex items-center justify-between text-emerald-600 font-bold">
-                  <span>Coupon Discount ({couponCode})</span>
-                  <span>- ₹{discountAmount}</span>
-                </div>
-              )}
+              <div className="flex items-center justify-between text-slate-600">
+                <span>German Diagnostic Telemetry</span>
+                <span className="text-emerald-600 font-bold">Included</span>
+              </div>
 
               <div className="flex items-center justify-between text-slate-600">
                 <span>GST (18% Govt. Tax)</span>
-                <span className="font-bold text-slate-900">₹{gstAmount}</span>
+                <span className="font-medium text-slate-500">Post-Inspection</span>
               </div>
 
               <div className="pt-3 border-t border-slate-100 flex items-baseline justify-between">
-                <span className="font-black text-slate-900 text-base">Final Total</span>
-                <span className="font-black text-rose-600 text-2xl">₹{finalTotal}</span>
+                <div>
+                  <span className="font-black text-slate-900 text-base block">Payable Advance</span>
+                  <span className="text-[10px] text-slate-400">Official quote shared after inspection</span>
+                </div>
+                <span className="font-black text-emerald-600 text-2xl">₹0</span>
               </div>
             </div>
 
             {/* Coupon Code Box */}
             <div className="pt-3 border-t border-slate-100">
-              <form onSubmit={handleApplyCouponManual} className="flex gap-2">
-                <input
-                  type="text"
-                  placeholder="Enter coupon (e.g. SRFIRST10)"
-                  value={couponCode}
-                  onChange={(e) => setCouponCode(e.target.value.toUpperCase())}
-                  className="flex-1 px-3 py-2 text-xs rounded-xl border border-slate-200 bg-slate-50 font-mono font-bold uppercase outline-none"
-                />
-                <button
-                  type="submit"
-                  className="px-3 py-2 bg-slate-900 text-white rounded-xl text-xs font-bold hover:bg-slate-800"
-                >
-                  Apply
-                </button>
-              </form>
-              {appliedCouponInfo.msg && (
-                <div className={`text-[11px] font-semibold mt-1.5 ${discountAmount > 0 ? 'text-emerald-600' : 'text-rose-600'}`}>
-                  {appliedCouponInfo.msg}
+              <div className="p-3 rounded-xl bg-slate-50 border border-slate-200 text-xs">
+                <div className="font-bold text-slate-700 flex items-center justify-between">
+                  <span>Promotional Offers & Coupons</span>
+                  <span className="text-[10px] text-amber-600 font-bold">Coming Soon</span>
                 </div>
-              )}
+                <p className="text-[11px] text-slate-500 mt-1">
+                  Special fleet discounts and festive promo codes are coming soon for Guwahati vehicle owners.
+                </p>
+              </div>
             </div>
 
             {/* Trust assurances */}

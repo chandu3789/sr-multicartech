@@ -11,12 +11,14 @@ import {
   Phone,
   Menu,
   X,
-  AlertCircle,
   ShieldCheck,
-  Sparkles,
   CalendarCheck,
   User,
-  Wrench
+  Wrench,
+  AlertTriangle,
+  Cpu,
+  Gift,
+  Clock
 } from 'lucide-react';
 import Logo from '../brand/Logo';
 import SearchDialog from '../search/SearchDialog';
@@ -26,7 +28,7 @@ import { SERVICE_CATEGORIES } from '@/lib/data/servicesData';
 
 export default function Header() {
   const pathname = usePathname();
-  const { currentCar, formattedCarName } = useCar();
+  const { currentCar } = useCar();
   const { currentCity, setCity, availableCities } = useCity();
 
   const [isScrolled, setIsScrolled] = useState(false);
@@ -35,20 +37,16 @@ export default function Header() {
   const [servicesDropdownOpen, setServicesDropdownOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
 
-  // Shrink header slightly on scroll
+  // Subtle shadow on scroll, maintaining uniform height
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 20) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
-      }
+      setIsScrolled(window.scrollY > 15);
     };
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Close mobile drawer when route changes
+  // Close drawers on route change
   useEffect(() => {
     setMobileMenuOpen(false);
     setServicesDropdownOpen(false);
@@ -56,54 +54,55 @@ export default function Header() {
   }, [pathname]);
 
   const navLinks = [
-    { name: 'Home', href: '/' },
     { name: 'Services', href: '/services', hasDropdown: true },
-    { name: 'Offers', href: '/offers', badge: 'DEALS' },
-    { name: 'SOS Assistance', href: '/sos', highlight: true },
-    { name: 'Track Service', href: '/track-service' },
-    { name: 'About Us', href: '/about' },
-    { name: 'Admin', href: '/admin', isSecondary: true }
+    { name: 'German Tech', href: '/#owner-technology', icon: Cpu, badge: 'OBD-II' },
+    { name: 'Track Live', href: '/track-service' },
+    { name: 'Offers', href: '/offers', badge: 'SOON', isMuted: true },
+    { name: 'About Us', href: '/about' }
   ];
 
   return (
     <>
       <header
-        className={`sticky top-0 z-40 w-full transition-all duration-300 ${
+        className={`sticky top-0 z-40 w-full transition-shadow duration-200 ${
           isScrolled
-            ? 'bg-white/95 backdrop-blur-md shadow-md py-2 border-b border-slate-200'
-            : 'bg-white py-3.5 border-b border-slate-100'
+            ? 'bg-white/95 backdrop-blur-md shadow-md border-b border-slate-200/80'
+            : 'bg-white border-b border-slate-100 shadow-sm'
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between gap-4">
-            {/* Left: Brand Logo */}
-            <div className="flex items-center gap-6">
-              <Logo showTagline={!isScrolled} />
+          <div className="flex items-center justify-between h-20 gap-4">
+            {/* Left: Brand Logo & City Pill */}
+            <div className="flex items-center gap-3 sm:gap-4 flex-shrink-0">
+              <Logo />
 
-              {/* City Selector Dropdown */}
+              {/* City Selector Pill */}
               <div className="relative hidden md:block">
                 <button
+                  type="button"
                   onClick={() => setCityDropdownOpen(!cityDropdownOpen)}
-                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-slate-100/80 hover:bg-slate-200/80 text-xs font-semibold text-slate-700 transition-colors"
+                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-slate-100 hover:bg-slate-200/80 text-xs font-bold text-slate-700 transition-colors cursor-pointer border border-slate-200/60"
+                  title="Select Service Location"
                 >
-                  <MapPin className="w-3.5 h-3.5 text-rose-600" />
-                  <span>{currentCity}</span>
+                  <MapPin className="w-3.5 h-3.5 text-rose-600 flex-shrink-0" />
+                  <span className="truncate max-w-[100px]">{currentCity}</span>
                   <ChevronDown className="w-3 h-3 text-slate-400" />
                 </button>
 
                 {cityDropdownOpen && (
-                  <div className="absolute left-0 mt-2 w-48 rounded-xl bg-white shadow-xl border border-slate-100 py-2 z-50 animate-in fade-in zoom-in-95 duration-150">
-                    <div className="px-3 py-1 text-[11px] font-bold text-slate-400 uppercase tracking-wider">
-                      Select Your City
+                  <div className="absolute left-0 mt-2 w-48 rounded-2xl bg-white shadow-xl border border-slate-100 py-2 z-50 animate-in fade-in zoom-in-95 duration-150">
+                    <div className="px-3.5 py-1 text-[10px] font-black text-slate-400 uppercase tracking-wider">
+                      Service Network Hubs
                     </div>
                     {availableCities.map((c) => (
                       <button
                         key={c.id}
+                        type="button"
                         onClick={() => {
                           setCity(c.name);
                           setCityDropdownOpen(false);
                         }}
-                        className={`w-full text-left px-3.5 py-2 text-xs font-medium flex items-center justify-between hover:bg-rose-50 hover:text-rose-600 ${
+                        className={`w-full text-left px-3.5 py-2 text-xs font-medium flex items-center justify-between hover:bg-rose-50 hover:text-rose-600 cursor-pointer ${
                           currentCity === c.name ? 'text-rose-600 font-bold bg-rose-50/50' : 'text-slate-700'
                         }`}
                       >
@@ -116,8 +115,8 @@ export default function Header() {
               </div>
             </div>
 
-            {/* Center / Right: Desktop Navigation Links */}
-            <nav className="hidden lg:flex items-center space-x-1 font-medium text-sm text-slate-700">
+            {/* Center: Desktop Navigation Links */}
+            <nav className="hidden xl:flex items-center space-x-1 font-semibold text-sm text-slate-700">
               {navLinks.map((link) => {
                 const isActive = pathname === link.href;
 
@@ -131,8 +130,8 @@ export default function Header() {
                     >
                       <Link
                         href={link.href}
-                        className={`px-3 py-2 rounded-lg flex items-center gap-1 hover:text-rose-600 transition-colors ${
-                          isActive ? 'text-rose-600 font-bold' : ''
+                        className={`px-3 py-2 rounded-xl flex items-center gap-1 hover:text-rose-600 hover:bg-slate-50 transition-all ${
+                          isActive ? 'text-rose-600 font-bold bg-rose-50/60' : ''
                         }`}
                       >
                         <span>{link.name}</span>
@@ -143,19 +142,19 @@ export default function Header() {
                       {servicesDropdownOpen && (
                         <div className="absolute left-0 top-full w-80 p-3 bg-white rounded-2xl shadow-2xl border border-slate-100 z-50 grid grid-cols-1 gap-1">
                           <div className="px-2 py-1 text-[10px] font-bold tracking-wider uppercase text-slate-400">
-                            Service Categories
+                            Service Divisions
                           </div>
                           {SERVICE_CATEGORIES.slice(0, 6).map((cat) => (
                             <Link
                               key={cat.id}
                               href={`/services#${cat.slug}`}
-                              className="p-2 rounded-xl hover:bg-rose-50 flex items-center justify-between group transition-all"
+                              className="p-2.5 rounded-xl hover:bg-rose-50 flex items-center justify-between group transition-all"
                             >
                               <div>
-                                <div className="text-xs font-semibold text-slate-800 group-hover:text-rose-600">
+                                <div className="text-xs font-bold text-slate-800 group-hover:text-rose-600">
                                   {cat.name}
                                 </div>
-                                <div className="text-[10px] text-slate-400">Starting ₹{cat.startingPrice}</div>
+                                <div className="text-[10px] text-slate-400">Pricing: Coming Soon</div>
                               </div>
                               {cat.badge && (
                                 <span className="text-[9px] font-bold px-1.5 py-0.5 rounded bg-amber-100 text-amber-800">
@@ -178,30 +177,23 @@ export default function Header() {
                   );
                 }
 
-                if (link.highlight) {
-                  return (
-                    <Link
-                      key={link.name}
-                      href={link.href}
-                      className="px-3 py-1.5 rounded-full text-xs font-bold bg-red-50 text-red-600 hover:bg-red-100 transition-all flex items-center gap-1.5 border border-red-200 shadow-sm"
-                    >
-                      <span className="w-2 h-2 rounded-full bg-red-500 animate-ping"></span>
-                      <span>SOS Emergency</span>
-                    </Link>
-                  );
-                }
-
                 return (
                   <Link
                     key={link.name}
                     href={link.href}
-                    className={`px-3 py-2 rounded-lg relative hover:text-rose-600 transition-colors ${
-                      isActive ? 'text-rose-600 font-bold' : ''
+                    className={`px-3 py-2 rounded-xl flex items-center gap-1.5 hover:text-rose-600 hover:bg-slate-50 transition-all ${
+                      isActive ? 'text-rose-600 font-bold bg-rose-50/60' : ''
                     }`}
                   >
                     <span>{link.name}</span>
                     {link.badge && (
-                      <span className="ml-1 px-1.5 py-0.5 text-[9px] font-bold rounded-full bg-rose-100 text-rose-600">
+                      <span
+                        className={`text-[9px] font-bold px-1.5 py-0.5 rounded-full ${
+                          link.isMuted
+                            ? 'bg-amber-100 text-amber-800'
+                            : 'bg-rose-100 text-rose-700'
+                        }`}
+                      >
                         {link.badge}
                       </span>
                     )}
@@ -210,51 +202,59 @@ export default function Header() {
               })}
             </nav>
 
-            {/* Right: Quick Tools & Primary CTA */}
-            <div className="flex items-center gap-2.5">
-              {/* Search Trigger Button */}
+            {/* Right: Quick Tools & Primary Actions */}
+            <div className="flex items-center gap-2 sm:gap-3 flex-shrink-0">
+              {/* Search Trigger */}
               <button
+                type="button"
                 onClick={() => setSearchOpen(true)}
-                className="p-2 text-slate-500 hover:text-rose-600 hover:bg-slate-100 rounded-xl transition-colors"
+                className="hidden lg:flex items-center gap-2 px-3 py-2 text-slate-600 hover:text-rose-600 bg-slate-100/80 hover:bg-slate-200/80 rounded-xl text-xs font-semibold transition-colors cursor-pointer"
                 title="Search services, cars, FAQs (Ctrl+K)"
               >
-                <Search className="w-4 h-4" />
+                <Search className="w-3.5 h-3.5 text-slate-500" />
+                <span className="hidden xl:inline">Search...</span>
+                <kbd className="hidden xl:inline-block px-1.5 py-0.5 text-[9px] font-mono bg-white rounded border border-slate-300 text-slate-400">
+                  ⌘K
+                </kbd>
               </button>
 
-              {/* Selected Car Badge */}
+              {/* SOS Emergency Pill */}
               <Link
-                href="/select-car"
-                className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-xl border border-slate-200 bg-slate-50 hover:bg-slate-100 text-slate-700 text-xs font-medium transition-all group"
+                href="/sos"
+                className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold bg-red-50 hover:bg-red-100 text-red-600 border border-red-200 transition-all shadow-sm"
               >
-                <Car className="w-4 h-4 text-rose-600 flex-shrink-0" />
-                <span className="truncate max-w-[130px] font-semibold text-slate-800">
-                  {currentCar ? `${currentCar.brand} ${currentCar.model}` : 'Select Car'}
-                </span>
-                <span className="text-[10px] text-rose-600 group-hover:underline">Change</span>
+                <span className="w-2 h-2 rounded-full bg-red-500 animate-ping"></span>
+                <span>24/7 SOS</span>
               </Link>
 
-              {/* Customer Account & Bookings Icon */}
+              {/* Selected Car Pill */}
               <Link
-                href="/my-bookings"
-                className="hidden md:flex p-2 text-slate-500 hover:text-rose-600 hover:bg-slate-100 rounded-xl transition-colors"
-                title="My Bookings & Vehicles"
+                href="/select-car"
+                className="hidden md:inline-flex items-center gap-2 px-3 py-2 rounded-xl border border-slate-200 bg-slate-50 hover:bg-slate-100 text-slate-700 text-xs font-bold transition-all group"
+                title="Current vehicle in your garage"
               >
-                <User className="w-4 h-4" />
+                <Car className="w-4 h-4 text-rose-600 flex-shrink-0" />
+                <span className="truncate max-w-[110px] text-slate-900 font-extrabold">
+                  {currentCar ? `${currentCar.brand} ${currentCar.model}` : 'Select Car'}
+                </span>
+                <span className="text-[10px] text-rose-600 group-hover:underline font-semibold">Change</span>
               </Link>
 
               {/* Book Service Primary CTA */}
               <Link
                 href="/book-service"
-                className="inline-flex items-center justify-center px-4 py-2 text-xs font-bold text-white bg-rose-600 hover:bg-rose-700 rounded-xl shadow-md shadow-rose-600/20 hover:shadow-lg hover:shadow-rose-600/30 transition-all"
+                className="inline-flex items-center justify-center px-4 sm:px-5 py-2.5 text-xs sm:text-sm font-extrabold text-white bg-gradient-to-r from-rose-600 to-rose-700 hover:from-rose-700 hover:to-rose-800 rounded-xl shadow-md shadow-rose-600/25 hover:shadow-lg hover:shadow-rose-600/35 transition-all whitespace-nowrap cursor-pointer"
               >
-                <CalendarCheck className="w-3.5 h-3.5 mr-1.5" />
+                <CalendarCheck className="w-4 h-4 mr-1.5 flex-shrink-0" />
                 <span>Book Service</span>
               </Link>
 
               {/* Mobile Hamburger Button */}
               <button
+                type="button"
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="p-2 lg:hidden text-slate-700 hover:text-rose-600 rounded-xl hover:bg-slate-100"
+                className="p-2.5 xl:hidden text-slate-700 hover:text-rose-600 rounded-xl hover:bg-slate-100 transition-colors cursor-pointer"
+                aria-label="Toggle Navigation Menu"
               >
                 {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
               </button>
@@ -264,114 +264,156 @@ export default function Header() {
 
         {/* Mobile Navigation Drawer */}
         {mobileMenuOpen && (
-          <div className="lg:hidden fixed inset-x-0 top-full bg-white border-b border-slate-200 shadow-2xl p-5 space-y-4 max-h-[80vh] overflow-y-auto z-50 animate-in slide-in-from-top duration-200">
+          <div className="xl:hidden fixed inset-x-0 top-20 bg-white border-b border-slate-200 shadow-2xl p-5 space-y-4 max-h-[85vh] overflow-y-auto z-50 animate-in slide-in-from-top duration-200">
             {/* Mobile Car Selector Bar */}
-            <div className="flex items-center justify-between p-3 rounded-xl bg-slate-50 border border-slate-200">
-              <div className="flex items-center gap-2.5">
-                <Car className="w-5 h-5 text-rose-600" />
+            <div className="flex items-center justify-between p-3.5 rounded-2xl bg-slate-50 border border-slate-200">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-xl bg-rose-600/10 text-rose-600 flex items-center justify-center">
+                  <Car className="w-5 h-5" />
+                </div>
                 <div>
-                  <div className="text-xs font-bold text-slate-800">
+                  <div className="text-xs font-black text-slate-900">
                     {currentCar ? `${currentCar.brand} ${currentCar.model}` : 'No Car Selected'}
                   </div>
-                  <div className="text-[10px] text-slate-500">{currentCar?.fuel || 'Choose your vehicle'}</div>
+                  <div className="text-[10px] text-slate-500 font-semibold">
+                    {currentCar?.fuel ? `${currentCar.fuel} Variant` : 'Select your vehicle for personalized service'}
+                  </div>
                 </div>
               </div>
+
               <Link
                 href="/select-car"
-                className="text-xs font-bold text-rose-600 px-2.5 py-1 rounded-lg bg-rose-50 border border-rose-200"
+                className="px-3 py-1.5 rounded-xl bg-rose-600 text-white text-xs font-bold shadow-sm"
               >
-                Change
+                {currentCar ? 'Change' : 'Select'}
               </Link>
             </div>
 
-            {/* Mobile City Selector */}
-            <div className="p-3 rounded-xl bg-slate-50 border border-slate-200">
-              <div className="text-xs font-semibold text-slate-500 mb-2 flex items-center gap-1.5">
-                <MapPin className="w-3.5 h-3.5 text-rose-600" />
-                Active City
+            {/* City Selector in Mobile */}
+            <div>
+              <div className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1.5">
+                Current City Hub
               </div>
               <div className="grid grid-cols-2 gap-2">
                 {availableCities.map((c) => (
                   <button
                     key={c.id}
-                    onClick={() => setCity(c.name)}
-                    className={`py-1.5 px-2 text-xs rounded-lg font-medium text-left border ${
+                    type="button"
+                    onClick={() => {
+                      setCity(c.name);
+                    }}
+                    className={`py-2 px-3 rounded-xl text-xs font-bold text-left flex items-center justify-between border ${
                       currentCity === c.name
-                        ? 'bg-rose-600 text-white border-rose-600 font-bold'
-                        : 'bg-white text-slate-700 border-slate-200'
+                        ? 'bg-rose-50 text-rose-700 border-rose-300'
+                        : 'bg-slate-50 text-slate-700 border-slate-200'
                     }`}
                   >
-                    {c.name}
+                    <span>{c.name}</span>
+                    {currentCity === c.name && <span className="text-[10px] text-rose-600">✓</span>}
                   </button>
                 ))}
               </div>
             </div>
 
-            {/* Navigation Links */}
-            <div className="space-y-1 pt-2">
-              {navLinks.map((link) => (
-                <Link
-                  key={link.name}
-                  href={link.href}
-                  className={`flex items-center justify-between px-3 py-2.5 rounded-xl text-sm font-semibold transition-colors ${
-                    pathname === link.href ? 'bg-rose-50 text-rose-600' : 'text-slate-800 hover:bg-slate-50'
-                  }`}
-                >
-                  <span>{link.name}</span>
-                  {link.badge && (
-                    <span className="text-[10px] px-2 py-0.5 rounded-full bg-rose-100 text-rose-600 font-bold">
-                      {link.badge}
-                    </span>
-                  )}
-                  {link.highlight && (
-                    <span className="text-[10px] px-2 py-0.5 rounded-full bg-red-600 text-white font-bold animate-pulse">
-                      24/7 LIVE
-                    </span>
-                  )}
-                </Link>
-              ))}
-            </div>
+            {/* Mobile Nav Links */}
+            <div className="space-y-1 pt-2 border-t border-slate-100">
+              <Link
+                href="/services"
+                className="flex items-center justify-between p-3 rounded-xl hover:bg-slate-50 text-slate-800 font-bold text-sm"
+              >
+                <div className="flex items-center gap-2.5">
+                  <Wrench className="w-4 h-4 text-rose-600" />
+                  <span>All Car Services</span>
+                </div>
+                <span className="text-xs text-slate-400">12 Categories</span>
+              </Link>
 
-            {/* Account & Garage Links */}
-            <div className="pt-2 border-t border-slate-100 space-y-1">
               <Link
-                href="/my-bookings"
-                className="flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-sm font-medium text-slate-700 hover:bg-slate-50"
+                href="/#owner-technology"
+                className="flex items-center justify-between p-3 rounded-xl hover:bg-slate-50 text-slate-800 font-bold text-sm"
               >
-                <CalendarCheck className="w-4 h-4 text-rose-600" />
-                <span>My Bookings</span>
+                <div className="flex items-center gap-2.5">
+                  <Cpu className="w-4 h-4 text-rose-600" />
+                  <span>Founder & German Tech</span>
+                </div>
+                <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-rose-100 text-rose-700">15 Yrs Exp</span>
               </Link>
+
               <Link
-                href="/my-vehicles"
-                className="flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-sm font-medium text-slate-700 hover:bg-slate-50"
+                href="/track-service"
+                className="flex items-center justify-between p-3 rounded-xl hover:bg-slate-50 text-slate-800 font-bold text-sm"
               >
-                <Car className="w-4 h-4 text-rose-600" />
-                <span>My Saved Vehicles</span>
+                <div className="flex items-center gap-2.5">
+                  <ShieldCheck className="w-4 h-4 text-rose-600" />
+                  <span>Track Service Live</span>
+                </div>
+                <span className="text-xs text-emerald-600 font-semibold">Real-time Telemetry</span>
               </Link>
+
+              <Link
+                href="/sos"
+                className="flex items-center justify-between p-3 rounded-xl bg-red-50 text-red-700 font-bold text-sm border border-red-200"
+              >
+                <div className="flex items-center gap-2.5">
+                  <AlertTriangle className="w-4 h-4 text-red-600" />
+                  <span>24/7 Emergency SOS Roadside</span>
+                </div>
+                <span className="text-[10px] bg-red-600 text-white px-2 py-0.5 rounded font-black">20-Min ETA</span>
+              </Link>
+
+              <Link
+                href="/offers"
+                className="flex items-center justify-between p-3 rounded-xl hover:bg-slate-50 text-slate-800 font-bold text-sm"
+              >
+                <div className="flex items-center gap-2.5">
+                  <Gift className="w-4 h-4 text-rose-600" />
+                  <span>Exclusive Offers</span>
+                </div>
+                <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-amber-100 text-amber-800">Coming Soon</span>
+              </Link>
+
+              <Link
+                href="/about"
+                className="flex items-center justify-between p-3 rounded-xl hover:bg-slate-50 text-slate-800 font-bold text-sm"
+              >
+                <div className="flex items-center gap-2.5">
+                  <User className="w-4 h-4 text-slate-500" />
+                  <span>About SR Multi Car Tech</span>
+                </div>
+              </Link>
+
               <Link
                 href="/admin"
-                className="flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-sm font-medium text-slate-700 hover:bg-slate-50"
+                className="flex items-center justify-between p-3 rounded-xl hover:bg-slate-50 text-slate-500 font-semibold text-xs"
               >
-                <ShieldCheck className="w-4 h-4 text-emerald-600" />
-                <span>Admin Dashboard</span>
+                <span>Admin & Operations Portal</span>
+                <span>→</span>
               </Link>
             </div>
 
-            {/* Emergency Hotline */}
-            <div className="pt-2">
+            {/* Mobile Contact & Book CTA */}
+            <div className="pt-4 border-t border-slate-200 space-y-2.5">
               <a
-                href="tel:+919876599999"
-                className="flex items-center justify-center gap-2 w-full py-2.5 px-4 rounded-xl bg-red-600 text-white font-bold text-xs shadow-md shadow-red-600/20"
+                href="tel:+919876543210"
+                className="w-full py-3 px-4 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold text-xs flex items-center justify-center gap-2 transition-colors"
               >
-                <Phone className="w-4 h-4" />
-                <span>Emergency 24/7 SOS Helpline</span>
+                <Phone className="w-4 h-4 text-rose-600" />
+                <span>Emergency Helpline: +91 98765 43210</span>
               </a>
+
+              <Link
+                href="/book-service"
+                className="w-full py-3.5 px-4 rounded-xl bg-rose-600 hover:bg-rose-700 text-white font-extrabold text-sm flex items-center justify-center gap-2 shadow-lg shadow-rose-600/30 transition-all"
+              >
+                <CalendarCheck className="w-4 h-4" />
+                <span>Book Service Now (Quote Coming Soon)</span>
+              </Link>
             </div>
           </div>
         )}
       </header>
 
-      {/* Global Search Dialog Modal */}
+      {/* Global Search Dialog (Ctrl+K) */}
       <SearchDialog isOpen={searchOpen} onClose={() => setSearchOpen(false)} />
     </>
   );

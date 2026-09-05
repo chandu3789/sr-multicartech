@@ -99,15 +99,12 @@ export default function ServiceDetailPage({ params }: { params: Promise<{ servic
             {/* Quick Price Booking Card */}
             <div className="lg:col-span-4">
               <div className="p-6 rounded-3xl bg-white text-slate-900 shadow-2xl border border-slate-100">
-                <span className="text-[11px] font-bold uppercase text-rose-600 block">Upfront Pricing</span>
+                <span className="text-[11px] font-bold uppercase text-rose-600 block tracking-wider">Pricing Status</span>
                 <div className="flex items-baseline gap-2 mt-1">
-                  <span className="text-4xl font-black text-slate-900">₹{service.startingPrice}</span>
-                  {service.originalPrice > service.startingPrice && (
-                    <span className="text-base text-slate-400 line-through">₹{service.originalPrice}</span>
-                  )}
+                  <span className="text-3xl font-black text-rose-600">Coming Soon</span>
                 </div>
-                <div className="text-xs text-emerald-700 font-bold mt-1">
-                  Save ₹{service.originalPrice - service.startingPrice} with seasonal discount
+                <div className="text-xs text-slate-500 font-medium mt-1">
+                  Transparent quotation shared after 50-point German diagnostics scan
                 </div>
 
                 {/* Active car preview */}

@@ -397,21 +397,32 @@ function CarSelectorContent() {
                 <p className="text-xs text-slate-500 mt-0.5">Different fuel types require specific filters and oil viscosities</p>
               </div>
 
-              <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 pt-2">
-                {modelObj.fuels.map((fuel) => (
-                  <button
-                    key={fuel}
-                    onClick={() => handleFuelSelect(fuel)}
-                    className={`py-4 px-3 rounded-2xl border text-center transition-all cursor-pointer ${
-                      activeFuel === fuel
-                        ? 'bg-rose-600 text-white border-rose-600 shadow-md'
-                        : 'bg-white border-slate-200 hover:border-rose-300 text-slate-800'
-                    }`}
-                  >
-                    <div className="font-bold text-sm">{fuel}</div>
-                  </button>
-                ))}
-              </div>
+              {(() => {
+                const fuelsToDisplay = modelObj.bodyType === 'EV'
+                  ? ['Electric']
+                  : Array.from(new Set([...modelObj.fuels, 'Petrol', 'Diesel', 'CNG + Petrol']));
+
+                return (
+                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 pt-2">
+                    {fuelsToDisplay.map((fuel) => (
+                      <button
+                        key={fuel}
+                        onClick={() => handleFuelSelect(fuel)}
+                        className={`py-4 px-3 rounded-2xl border text-center transition-all cursor-pointer ${
+                          activeFuel === fuel
+                            ? 'bg-rose-600 text-white border-rose-600 shadow-md ring-2 ring-rose-300'
+                            : 'bg-white border-slate-200 hover:border-rose-300 hover:shadow-sm text-slate-800'
+                        }`}
+                      >
+                        <div className="font-bold text-sm">{fuel}</div>
+                        <span className="text-[10px] text-slate-400 block mt-0.5">
+                          {fuel === 'CNG + Petrol' ? 'Dual-Fuel Bi-Fuel' : fuel === 'Diesel' ? 'Turbo-Diesel CRDi' : fuel === 'Petrol' ? 'Multi-point MPFi' : 'Zero-Emission'}
+                        </span>
+                      </button>
+                    ))}
+                  </div>
+                );
+              })()}
 
               <div className="flex justify-between pt-4">
                 <button
