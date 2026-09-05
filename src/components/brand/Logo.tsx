@@ -19,47 +19,51 @@ export default function Logo({
 }: LogoProps) {
   const isDark = variant === 'dark';
 
-  const emblemSizes = {
-    sm: 'h-8 sm:h-9',
-    md: 'h-9 sm:h-11',
-    lg: 'h-12 sm:h-14'
+  const badgeSizes = {
+    sm: { dimension: 44, className: 'w-10 h-10 sm:w-11 sm:h-11' },
+    md: { dimension: 64, className: 'w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16' },
+    lg: { dimension: 96, className: 'w-20 h-20 sm:w-24 sm:h-24' }
   };
 
-  const textSizes = {
-    sm: 'text-sm sm:text-base',
-    md: 'text-base sm:text-lg',
-    lg: 'text-lg sm:text-xl'
+  const titleSizes = {
+    sm: { sr: 'text-xl', text: 'text-sm sm:text-base' },
+    md: { sr: 'text-2xl sm:text-[26px]', text: 'text-base sm:text-lg md:text-xl' },
+    lg: { sr: 'text-3xl sm:text-4xl', text: 'text-xl sm:text-2xl' }
   };
+
+  const currentBadge = badgeSizes[size];
 
   return (
     <Link
       href="/"
       className={`inline-flex items-center gap-2.5 sm:gap-3.5 group select-none whitespace-nowrap py-1 ${className}`}
-      title="SR Multi Car Tech — Complete Car Care & German Diagnostics"
+      title="SR Multi Car Tech — Your Drive Our Priority"
     >
-      {/* 3D Sculpted Metallic Chrome & Ruby 'SR' Master Emblem */}
+      {/* Official Master Emblem (User's Exact Custom Badge) */}
       <div
-        className={`relative ${emblemSizes[size]} w-auto aspect-[790/348] flex-shrink-0 transition-transform duration-300 group-hover:scale-105 filter drop-shadow-[0_3px_10px_rgba(225,29,72,0.25)]`}
+        className={`relative ${currentBadge.className} flex-shrink-0 transition-transform duration-300 group-hover:scale-105 filter drop-shadow-[0_4px_14px_rgba(225,29,72,0.25)]`}
       >
         <Image
-          src="/images/sr-emblem.png"
-          alt="SR Multi Car Tech"
-          width={110}
-          height={48}
+          src="/images/sr-logo.png"
+          alt="SR Multi Car Tech Official Logo"
+          width={currentBadge.dimension}
+          height={currentBadge.dimension}
           priority
-          className="h-full w-auto object-contain drop-shadow-sm"
+          className="w-full h-full object-contain"
         />
       </div>
 
-      {/* Subtle Vertical Hairline Separator */}
-      <div className={`hidden sm:block w-[1.5px] h-8 rounded-full ${isDark ? 'bg-slate-700' : 'bg-slate-200'}`} />
-
-      {/* Brand Typography (Cohesive & Cleanly Aligned) */}
+      {/* Flawlessly Aligned Brand Typography */}
       <div className="flex flex-col justify-center">
-        {/* Primary Wordmark */}
+        {/* Main Brand Name Line */}
         <div className="flex items-center leading-tight">
           <span
-            className={`${textSizes[size]} font-black tracking-wider uppercase font-sans transition-colors duration-200 ${
+            className={`${titleSizes[size].sr} font-black tracking-tight text-rose-600 font-sans`}
+          >
+            SR
+          </span>
+          <span
+            className={`${titleSizes[size].text} font-black tracking-wider uppercase ml-1.5 sm:ml-2 font-sans transition-colors duration-200 ${
               isDark ? 'text-white' : 'text-slate-950'
             }`}
           >
@@ -67,19 +71,31 @@ export default function Logo({
           </span>
         </div>
 
-        {/* Secondary Sub-Tagline */}
+        {/* Secondary Sub-Tagline from Official Logo */}
         {showTagline && (
-          <div className="flex items-center gap-1.5 mt-0.5 leading-none">
-            <span className="text-[9px] sm:text-[9.5px] font-black tracking-[0.16em] uppercase text-rose-600">
-              GERMAN DIAGNOSTICS
+          <div className="flex items-center gap-1 sm:gap-1.5 mt-1 leading-none">
+            <span className="text-[8.5px] sm:text-[9.5px] font-black tracking-[0.14em] uppercase text-rose-600">
+              SERVICE
             </span>
-            <span className="w-1 h-1 rounded-full bg-rose-500 flex-shrink-0" />
+            <span className="text-slate-300 text-[9px]">•</span>
             <span
-              className={`text-[9px] sm:text-[9.5px] font-bold tracking-[0.12em] uppercase ${
-                isDark ? 'text-slate-400' : 'text-slate-500'
+              className={`text-[8.5px] sm:text-[9.5px] font-bold tracking-[0.12em] uppercase ${
+                isDark ? 'text-slate-300' : 'text-slate-600'
               }`}
             >
-              CAR CARE
+              REPAIR
+            </span>
+            <span className="text-slate-300 text-[9px]">•</span>
+            <span className="text-[8.5px] sm:text-[9.5px] font-black tracking-[0.14em] uppercase text-rose-600">
+              DIAGNOSIS
+            </span>
+            <span className="text-slate-300 text-[9px]">•</span>
+            <span
+              className={`text-[8.5px] sm:text-[9.5px] font-bold tracking-[0.12em] uppercase ${
+                isDark ? 'text-slate-300' : 'text-slate-600'
+              }`}
+            >
+              CARE
             </span>
           </div>
         )}

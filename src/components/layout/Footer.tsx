@@ -45,8 +45,11 @@ export default function Footer() {
           {/* Brand Bio & Contact */}
           <div className="col-span-2 space-y-4">
             <Logo variant="dark" showTagline={true} />
+            <div className="text-xs font-serif italic text-rose-400 font-semibold tracking-wide">
+              “Your Drive Our Priority”
+            </div>
             <p className="text-xs text-slate-400 leading-relaxed max-w-sm">
-              SR Multi Car Tech is your technology-first automotive service partner. Experience transparent pricing, verified master technicians, and stress-free car care at your doorstep or our certified workshop hubs.
+              SR Multi Car Tech is your technology-first automotive service partner in Satrampadu, Eluru. Experience transparent pricing, verified master technicians, and stress-free car care at your doorstep or our certified workshop hub.
             </p>
 
             <div className="space-y-2 pt-2 text-xs text-slate-300">
