@@ -35,7 +35,7 @@ export default function PrivacyPolicyPage() {
           <section className="space-y-3">
             <h2 className="text-lg font-bold text-slate-900">4. Contact Information</h2>
             <p>
-              For any questions regarding our privacy practices or data policies, contact us at <strong>care@srmulticartech.com</strong> or call <strong>+91 98765 43210</strong>.
+              For any questions regarding our privacy practices or data policies, contact us at <strong>care@srmulticartech.com</strong> or call <strong>+91 95504 25789</strong>.
             </p>
           </section>
         </div>

@@ -52,19 +52,19 @@ export default function Footer() {
             <div className="space-y-2 pt-2 text-xs text-slate-300">
               <div className="flex items-center gap-2.5">
                 <Phone className="w-4 h-4 text-rose-500 flex-shrink-0" />
-                <a href="tel:+919876543210" className="hover:text-white transition-colors">
-                  +91 98765 43210 (Customer Care)
+                <a href="tel:+919550425789" className="hover:text-white transition-colors">
+                  +91 95504 25789 (Customer Care)
                 </a>
               </div>
               <div className="flex items-center gap-2.5">
                 <MessageCircle className="w-4 h-4 text-emerald-500 flex-shrink-0" />
                 <a
-                  href="https://wa.me/919876543210"
+                  href="https://wa.me/919550425789"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="hover:text-white transition-colors"
                 >
-                  +91 98765 43210 (WhatsApp Support)
+                  +91 95504 25789 (WhatsApp Support)
                 </a>
               </div>
               <div className="flex items-center gap-2.5">
@@ -75,8 +75,16 @@ export default function Footer() {
               </div>
               <div className="flex items-start gap-2.5 pt-1">
                 <MapPin className="w-4 h-4 text-rose-500 flex-shrink-0 mt-0.5" />
-                <span className="text-slate-400">
-                  Plot 14, Auto Nagar, Sanivarapupeta Road, Eluru, Andhra Pradesh 534001
+                <span className="text-slate-400 leading-relaxed">
+                  Near Main Road, Satrampadu, Eluru, Andhra Pradesh - 534007
+                  <a
+                    href="https://www.google.com/maps/search/?api=1&query=SR+Multi+Car+Tech+Satrampadu+Eluru+Andhra+Pradesh"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block text-rose-400 hover:text-rose-300 font-bold mt-1 text-[11px]"
+                  >
+                    📍 Get Directions on Google Maps &rarr;
+                  </a>
                 </span>
               </div>
               <div className="flex items-center gap-2.5 pt-1">
@@ -93,6 +101,11 @@ export default function Footer() {
               <li>
                 <Link href="/services#periodic-services" className="hover:text-white transition-colors">
                   Periodic Car Service
+                </Link>
+              </li>
+              <li>
+                <Link href="/services#car-spa-cleaning" className="text-rose-400 hover:text-rose-300 font-semibold transition-colors">
+                  ✨ Car Wash Premium
                 </Link>
               </li>
               <li>
@@ -221,7 +234,7 @@ export default function Footer() {
 
           <div className="flex items-center space-x-4">
             <a
-              href="https://wa.me/919876543210"
+              href="https://wa.me/919550425789"
               target="_blank"
               rel="noopener noreferrer"
               className="p-2 rounded-lg bg-slate-900 hover:bg-emerald-600 hover:text-white transition-all text-slate-400"
@@ -230,7 +243,7 @@ export default function Footer() {
               <MessageCircle className="w-4 h-4" />
             </a>
             <a
-              href="tel:+919876543210"
+              href="tel:+919550425789"
               className="p-2 rounded-lg bg-slate-900 hover:bg-rose-600 hover:text-white transition-all text-slate-400"
               title="Call Helpline"
             >

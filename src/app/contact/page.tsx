@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Phone, Mail, MapPin, Clock, MessageCircle, Send, CheckCircle2 } from 'lucide-react';
+import { Phone, Mail, MapPin, Clock, MessageCircle, Send, CheckCircle2, Navigation } from 'lucide-react';
 import { WORKSHOP_LOCATIONS } from '@/lib/data/workshopsData';
 
 export default function ContactPage() {
@@ -37,20 +37,20 @@ export default function ContactPage() {
 
               <div className="space-y-3 text-xs">
                 <a
-                  href="tel:+919876543210"
+                  href="tel:+919550425789"
                   className="p-3.5 rounded-2xl bg-slate-50 border border-slate-100 hover:border-rose-200 flex items-center gap-3 transition-colors block"
                 >
                   <div className="w-10 h-10 rounded-xl bg-rose-50 text-rose-600 flex items-center justify-center flex-shrink-0">
                     <Phone className="w-5 h-5" />
                   </div>
                   <div>
-                    <div className="font-bold text-slate-900">+91 98765 43210</div>
+                    <div className="font-bold text-slate-900">+91 95504 25789</div>
                     <div className="text-slate-500 text-[11px]">General Inquiries & Bookings</div>
                   </div>
                 </a>
 
                 <a
-                  href="https://wa.me/919876543210"
+                  href="https://wa.me/919550425789"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="p-3.5 rounded-2xl bg-emerald-50/50 border border-emerald-100 hover:border-emerald-300 flex items-center gap-3 transition-colors block"
@@ -59,20 +59,20 @@ export default function ContactPage() {
                     <MessageCircle className="w-5 h-5 fill-current" />
                   </div>
                   <div>
-                    <div className="font-bold text-emerald-950">+91 98765 43210 (WhatsApp)</div>
+                    <div className="font-bold text-emerald-950">+91 95504 25789 (WhatsApp)</div>
                     <div className="text-emerald-700 text-[11px]">Instant Estimates & Live Photo Updates</div>
                   </div>
                 </a>
 
                 <a
-                  href="tel:+919876599999"
+                  href="tel:+919550425789"
                   className="p-3.5 rounded-2xl bg-red-50/50 border border-red-200 hover:border-red-300 flex items-center gap-3 transition-colors block"
                 >
                   <div className="w-10 h-10 rounded-xl bg-red-600 text-white flex items-center justify-center flex-shrink-0">
                     <Phone className="w-5 h-5" />
                   </div>
                   <div>
-                    <div className="font-bold text-red-950">+91 98765 99999 (24/7 SOS Helpline)</div>
+                    <div className="font-bold text-red-950">+91 95504 25789 (24/7 SOS Helpline)</div>
                     <div className="text-red-700 text-[11px]">Breakdowns, Towing & Jumpstarts</div>
                   </div>
                 </a>
@@ -94,10 +94,21 @@ export default function ContactPage() {
               <span className="text-[10px] font-bold uppercase text-rose-400">Headquarters Workshop</span>
               <h4 className="font-bold text-base">SR Multi Car Tech Central Hub</h4>
               <p className="text-xs text-slate-300 leading-relaxed">
-                Plot 14, Auto Nagar, Sanivarapupeta Road, Eluru, Andhra Pradesh 534001
+                Near Main Road, Satrampadu, Eluru, Andhra Pradesh - 534007
               </p>
               <div className="text-xs text-slate-400">
-                Landmark: Near Sanivarapupeta Junction & Powerpet Road, Eluru
+                Landmark: Satrampadu Main Road, Eluru
+              </div>
+              <div className="pt-2">
+                <a
+                  href="https://www.google.com/maps/search/?api=1&query=SR+Multi+Car+Tech+Satrampadu+Eluru+Andhra+Pradesh"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full py-2.5 px-4 rounded-xl bg-rose-600 hover:bg-rose-700 text-white text-xs font-bold flex items-center justify-center gap-2 transition-all shadow-md shadow-rose-600/30"
+                >
+                  <Navigation className="w-3.5 h-3.5" />
+                  <span>Get Directions (Satrampadu, Eluru)</span>
+                </a>
               </div>
             </div>
           </div>
@@ -137,7 +148,7 @@ export default function ContactPage() {
                     <input
                       type="tel"
                       required
-                      placeholder="e.g. 9876543210"
+                      placeholder="e.g. 9550425789"
                       className="w-full p-3 rounded-xl border border-slate-200 bg-slate-50 text-sm font-semibold outline-none focus:bg-white focus:border-rose-600"
                     />
                   </div>

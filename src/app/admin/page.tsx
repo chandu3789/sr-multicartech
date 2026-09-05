@@ -461,10 +461,10 @@ export default function AdminDashboardPage() {
             <div className="bg-slate-800 rounded-3xl border border-slate-700 overflow-hidden p-4">
               <div className="divide-y divide-slate-700/60 text-xs">
                 {[
-                  { name: 'Bikash Kalita', phone: '+91 98765 43210', car: 'Hyundai Creta SX (Petrol)', spend: '₹4,246', orders: 1 },
-                  { name: 'Prashant Barman', phone: '+91 98640 12345', car: 'Maruti Swift ZXi (Petrol)', spend: '₹1,379', orders: 1 },
-                  { name: 'Ananya Sharma', phone: '+91 98540 98765', car: 'Tata Nexon (Diesel)', spend: '₹824', orders: 1 },
-                  { name: 'Rohit Borah', phone: '+91 98765 22334', car: 'Tata Nexon EV Max', spend: '₹2,199', orders: 2 }
+                  { name: 'Purna Rao', phone: '+91 95504 25789', car: 'Hyundai Creta SX (Petrol)', spend: '₹4,246', orders: 1 },
+                  { name: 'K. Srinivas', phone: '+91 94401 23456', car: 'Maruti Swift ZXi (Petrol)', spend: '₹1,379', orders: 1 },
+                  { name: 'V. Lakshmi', phone: '+91 98480 12345', car: 'Tata Nexon (Diesel)', spend: '₹824', orders: 1 },
+                  { name: 'M. Naidu', phone: '+91 95504 25789', car: 'Tata Nexon EV Max', spend: '₹2,199', orders: 2 }
                 ].map((cust, idx) => (
                   <div key={idx} className="py-3 flex items-center justify-between">
                     <div>

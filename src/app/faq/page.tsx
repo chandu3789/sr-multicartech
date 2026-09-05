@@ -100,10 +100,10 @@ export default function FAQPage() {
               Contact Advisors
             </Link>
             <a
-              href="tel:+919876543210"
+              href="tel:+919550425789"
               className="px-6 py-2.5 rounded-xl border border-slate-200 hover:bg-slate-50 text-slate-700 font-bold text-xs"
             >
-              Call Helpline
+              Call Helpline (+91 95504 25789)
             </a>
           </div>
         </div>

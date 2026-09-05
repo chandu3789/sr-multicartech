@@ -32,7 +32,7 @@ export default function WorkshopLocator() {
           </h2>
 
           <p className="text-sm sm:text-base text-slate-600 mt-2 leading-relaxed">
-            All automotive servicing, mechanical overhauls, and electronic diagnostics are centralized at our state-of-the-art facility in Auto Nagar, Eluru, Andhra Pradesh.
+            All automotive servicing, mechanical overhauls, and electronic diagnostics are centralized at our state-of-the-art facility in Satrampadu, Eluru, Andhra Pradesh.
           </p>
         </div>
 
@@ -66,7 +66,7 @@ export default function WorkshopLocator() {
                       {flagship.area}, {flagship.city} — {flagship.pincode}
                     </div>
                     <div className="text-[11px] text-rose-400 font-semibold mt-1">
-                      Landmark: Near Sanivarapupeta Junction & Powerpet Road
+                      Landmark: Satrampadu Main Road, Eluru
                     </div>
                   </div>
                 </div>
@@ -94,18 +94,18 @@ export default function WorkshopLocator() {
             {/* Action Buttons */}
             <div className="pt-6 border-t border-slate-800 grid grid-cols-2 gap-3">
               <a
-                href={`https://maps.google.com/?q=${encodeURIComponent(flagship.name + ' ' + flagship.address + ' ' + flagship.city)}`}
+                href="https://www.google.com/maps/search/?api=1&query=SR+Multi+Car+Tech+Satrampadu+Eluru+Andhra+Pradesh"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="py-3 px-4 rounded-xl bg-slate-800 hover:bg-slate-700 text-white text-xs font-bold flex items-center justify-center gap-1.5 transition-all text-center border border-slate-700"
+                className="py-3 px-4 rounded-xl bg-gradient-to-r from-rose-600 to-rose-700 hover:from-rose-500 hover:to-rose-600 text-white text-xs font-black flex items-center justify-center gap-1.5 transition-all text-center shadow-lg shadow-rose-600/30 border border-rose-500/40"
               >
-                <Navigation className="w-4 h-4 text-rose-400" />
+                <Navigation className="w-4 h-4 text-white" />
                 <span>Get Directions</span>
               </a>
 
               <Link
                 href="/book-service"
-                className="py-3 px-4 rounded-xl bg-rose-600 hover:bg-rose-700 text-white text-xs font-bold flex items-center justify-center gap-1.5 shadow-lg shadow-rose-600/30 transition-all text-center"
+                className="py-3 px-4 rounded-xl bg-slate-800 hover:bg-slate-700 text-white text-xs font-bold flex items-center justify-center gap-1.5 transition-all text-center border border-slate-700"
               >
                 <Calendar className="w-4 h-4" />
                 <span>Book Service Bay</span>
@@ -124,7 +124,7 @@ export default function WorkshopLocator() {
                 Equipped for Precision Multi-Brand Servicing
               </h4>
               <p className="text-xs sm:text-sm text-slate-500 mt-1.5 leading-relaxed">
-                Whether you drive a Maruti Suzuki, Hyundai, Tata, Mahindra, Toyota, or a luxury German sedan (BMW, Audi, Mercedes), our Eluru flagship facility is fully outfitted with manufacturer-grade diagnostic equipment and factory-calibrated tools.
+                Whether you drive a Maruti Suzuki, Hyundai, Tata, Mahindra, Toyota, or a luxury German sedan (BMW, Audi, Mercedes), our Satrampadu, Eluru flagship facility is fully outfitted with manufacturer-grade diagnostic equipment and factory-calibrated tools.
               </p>
 
               {/* 6 Capabilities Grid */}
@@ -149,7 +149,7 @@ export default function WorkshopLocator() {
             {/* Guarantee Note */}
             <div className="mt-8 pt-6 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs">
               <div className="text-slate-600">
-                <strong className="text-slate-900">Doorstep Convenience:</strong> Can&apos;t visit Auto Nagar in person? Our valet drivers will pick up and return your vehicle right from your home anywhere in Eluru.
+                <strong className="text-slate-900">Doorstep Convenience:</strong> Can&apos;t visit Satrampadu in person? Our valet drivers will pick up and return your vehicle right from your home anywhere in Eluru.
               </div>
 
               <Link

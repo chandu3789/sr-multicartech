@@ -9,10 +9,10 @@ export default function ProfilePage() {
   const { currentCity } = useCity();
   const { currentCar } = useCar();
 
-  const [name, setName] = useState('Bikash Kalita');
-  const [phone, setPhone] = useState('9876543210');
-  const [email, setEmail] = useState('bikash.kalita@example.com');
-  const [address, setAddress] = useState('Flat 4B, Silver Heights, GS Road, Christian Basti');
+  const [name, setName] = useState('Purna Rao');
+  const [phone, setPhone] = useState('9550425789');
+  const [email, setEmail] = useState('purna.rao@example.com');
+  const [address, setAddress] = useState('Near Main Road, Satrampadu, Eluru, Andhra Pradesh - 534007');
   const [savedSuccess, setSavedSuccess] = useState(false);
 
   const handleSave = (e: React.FormEvent) => {

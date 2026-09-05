@@ -69,12 +69,12 @@ export default function SupportChatWidget() {
     } else if (option === 'Roadside Assistance') {
       addBotResponse('🚨 Need emergency rescue? We dispatch flatbed towing, puncture vans, and jumpstart units within 25 minutes.', [
         { label: 'Request Immediate SOS Help', action: () => { setIsOpen(false); router.push('/sos'); } },
-        { label: 'Call Helpline (+91 98765 99999)', action: () => { window.location.href = 'tel:+919876599999'; } }
+        { label: 'Call Helpline (+91 95504 25789)', action: () => { window.location.href = 'tel:+919550425789'; } }
       ]);
     } else if (option === 'Talk to Support') {
       addBotResponse('Our support executive is available on WhatsApp and phone right away:', [
-        { label: 'Chat on WhatsApp', action: () => { window.open('https://wa.me/919876543210', '_blank'); } },
-        { label: 'Call 98765 43210', action: () => { window.location.href = 'tel:+919876543210'; } }
+        { label: 'Chat on WhatsApp', action: () => { window.open('https://wa.me/919550425789', '_blank'); } },
+        { label: 'Call 95504 25789', action: () => { window.location.href = 'tel:+919550425789'; } }
       ]);
     }
   };
@@ -110,7 +110,7 @@ export default function SupportChatWidget() {
       ]);
     } else {
       addBotResponse('Thank you for reaching out! Our service advisors are ready to assist. You can also directly call or message us on WhatsApp:', [
-        { label: 'Open WhatsApp Chat', action: () => { window.open('https://wa.me/919876543210', '_blank'); } },
+        { label: 'Open WhatsApp Chat', action: () => { window.open('https://wa.me/919550425789', '_blank'); } },
         { label: 'View Booking Options', action: () => { setIsOpen(false); router.push('/book-service'); } }
       ]);
     }

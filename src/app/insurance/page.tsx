@@ -173,7 +173,7 @@ export default function InsurancePage() {
 
               <div className="pt-2 flex justify-between items-center">
                 <span className="text-xs text-slate-500 font-medium">
-                  Direct Claims Hotline: <strong className="text-rose-600">+91 98765 43210</strong>
+                  Direct Claims Hotline: <strong className="text-rose-600">+91 95504 25789</strong>
                 </span>
                 <button
                   type="submit"

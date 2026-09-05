@@ -13,7 +13,7 @@ export default function FloatingActions() {
       {/* Desktop Left-Bottom Floating WhatsApp & Call Buttons */}
       <div className="hidden md:flex fixed bottom-6 left-6 z-40 flex-col gap-2.5">
         <a
-          href="https://wa.me/919876543210"
+          href="https://wa.me/919550425789"
           target="_blank"
           rel="noopener noreferrer"
           className="flex items-center gap-2 px-3.5 py-2.5 rounded-full bg-emerald-600 text-white font-bold text-xs shadow-lg hover:bg-emerald-700 hover:scale-105 transition-all group"
@@ -24,7 +24,7 @@ export default function FloatingActions() {
         </a>
 
         <a
-          href="tel:+919876543210"
+          href="tel:+919550425789"
           className="flex items-center gap-2 px-3.5 py-2.5 rounded-full bg-slate-900 text-white font-bold text-xs shadow-lg hover:bg-slate-800 hover:scale-105 transition-all group border border-slate-800"
           title="Call SR Multi Car Tech Helpline"
         >
@@ -37,7 +37,7 @@ export default function FloatingActions() {
       <div className="md:hidden fixed bottom-0 inset-x-0 z-40 bg-white/95 backdrop-blur-md border-t border-slate-200 px-3 py-2 shadow-2xl flex items-center justify-between gap-2">
         {/* Call Button */}
         <a
-          href="tel:+919876543210"
+          href="tel:+919550425789"
           className="flex-1 flex flex-col items-center justify-center py-1.5 px-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 text-[11px] font-semibold transition-colors"
         >
           <Phone className="w-4 h-4 text-slate-700 mb-0.5" />
@@ -46,7 +46,7 @@ export default function FloatingActions() {
 
         {/* WhatsApp Button */}
         <a
-          href="https://wa.me/919876543210"
+          href="https://wa.me/919550425789"
           target="_blank"
           rel="noopener noreferrer"
           className="flex-1 flex flex-col items-center justify-center py-1.5 px-2 rounded-xl bg-emerald-50 hover:bg-emerald-100 text-emerald-700 text-[11px] font-semibold transition-colors"

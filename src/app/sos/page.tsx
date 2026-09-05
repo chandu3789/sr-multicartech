@@ -91,11 +91,11 @@ export default function SosPage() {
           {/* Emergency Direct Call Button */}
           <div className="mt-6 flex flex-col sm:flex-row items-center justify-center gap-4">
             <a
-              href="tel:+919876599999"
+              href="tel:+919550425789"
               className="w-full sm:w-auto px-8 py-4 rounded-2xl bg-red-600 hover:bg-red-700 text-white font-black text-sm shadow-xl shadow-red-600/30 flex items-center justify-center gap-2 transition-all hover:scale-105 active:scale-95"
             >
               <Phone className="w-5 h-5 animate-bounce" />
-              <span>Call 24/7 Helpline: +91 98765 99999</span>
+              <span>Call 24/7 Helpline: +91 95504 25789</span>
             </a>
           </div>
         </div>
@@ -252,7 +252,7 @@ export default function SosPage() {
 
                 <div className="flex items-center justify-between text-xs">
                   <span className="text-slate-400">Assigned Driver</span>
-                  <span className="font-bold text-white">Dhiraj Das (+91 98765 11009)</span>
+                  <span className="font-bold text-white">Dhiraj Das (+91 95504 25789)</span>
                 </div>
 
                 <div className="flex items-center justify-between text-xs">
@@ -268,7 +268,7 @@ export default function SosPage() {
 
               <div className="pt-2">
                 <a
-                  href="tel:+919876511009"
+                  href="tel:+919550425789"
                   className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-red-600 hover:bg-red-700 text-white font-bold text-xs shadow-md"
                 >
                   <Phone className="w-4 h-4" />

@@ -13,8 +13,8 @@ export async function POST(request: Request) {
       etaMinutes: 18,
       assignedUnit: 'Rapid Breakdown Rescue Van #4',
       technician: {
-        name: 'Dhiraj Das',
-        phone: '+91 98765 11009'
+        name: 'Dhiraj',
+        phone: '+91 95504 25789'
       },
       message: 'Technician dispatched and en route to your GPS location.'
     }, { status: 201 });

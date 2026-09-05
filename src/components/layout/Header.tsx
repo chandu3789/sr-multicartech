@@ -19,7 +19,8 @@ import {
   Gift,
   Home,
   Clock,
-  Sparkles
+  Sparkles,
+  Navigation
 } from 'lucide-react';
 import Logo from '../brand/Logo';
 import SearchDialog from '../search/SearchDialog';
@@ -61,22 +62,29 @@ export default function Header() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between text-xs">
             {/* Left: City Selector & Contact Helpline */}
             <div className="flex items-center gap-6">
-              {/* Single Workshop Location (Eluru, Andhra Pradesh) */}
+              {/* Single Workshop Location (Satrampadu, Eluru) */}
               <div className="flex items-center gap-2 text-slate-300 font-medium">
                 <MapPin className="w-3.5 h-3.5 text-rose-500 flex-shrink-0" />
-                <span>Location: <strong className="text-white font-bold">Eluru, Andhra Pradesh</strong></span>
-                <span className="text-[10px] font-black uppercase tracking-wider px-2 py-0.5 rounded-full bg-rose-500/20 text-rose-400 border border-rose-500/30">
-                  Flagship Facility
-                </span>
+                <span>Location: <strong className="text-white font-bold">Satrampadu, Eluru</strong></span>
+                <a
+                  href="https://www.google.com/maps/search/?api=1&query=SR+Multi+Car+Tech+Satrampadu+Eluru+Andhra+Pradesh"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1 text-[10px] font-black uppercase tracking-wider px-2 py-0.5 rounded-full bg-rose-500/20 hover:bg-rose-500/30 text-rose-300 border border-rose-500/40 transition-colors ml-1"
+                  title="Get Directions to Satrampadu, Eluru Workshop on Google Maps"
+                >
+                  <Navigation className="w-2.5 h-2.5" />
+                  <span>Directions</span>
+                </a>
               </div>
 
               {/* Direct Helpline */}
               <a
-                href="tel:+919876543210"
+                href="tel:+919550425789"
                 className="flex items-center gap-1.5 text-slate-400 hover:text-rose-400 transition-colors"
               >
                 <Phone className="w-3.5 h-3.5 text-rose-500" />
-                <span>24/7 Helpline: <strong className="text-slate-200">+91 98765 43210</strong></span>
+                <span>24/7 Helpline: <strong className="text-slate-200">+91 95504 25789</strong></span>
               </a>
 
               {/* OEM Parts Guarantee */}
@@ -361,11 +369,21 @@ export default function Header() {
             {/* Mobile Contact & Book CTA */}
             <div className="pt-4 border-t border-slate-200 space-y-2.5">
               <a
-                href="tel:+919876543210"
+                href="https://www.google.com/maps/search/?api=1&query=SR+Multi+Car+Tech+Satrampadu+Eluru+Andhra+Pradesh"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full py-2.5 px-4 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs flex items-center justify-center gap-2 transition-colors border border-slate-800"
+              >
+                <Navigation className="w-4 h-4 text-rose-400" />
+                <span>Get Directions (Satrampadu, Eluru)</span>
+              </a>
+
+              <a
+                href="tel:+919550425789"
                 className="w-full py-3 px-4 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold text-xs flex items-center justify-center gap-2 transition-colors"
               >
                 <Phone className="w-4 h-4 text-rose-600" />
-                <span>Emergency Helpline: +91 98765 43210</span>
+                <span>Emergency Helpline: +91 95504 25789</span>
               </a>
 
               <Link

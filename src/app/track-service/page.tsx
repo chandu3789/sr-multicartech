@@ -82,7 +82,7 @@ function TrackServiceContent() {
           <form onSubmit={handleSearch} className="mt-6 flex gap-2 max-w-md mx-auto">
             <input
               type="text"
-              placeholder="e.g. SRMCT-10821 or 9876543210"
+              placeholder="e.g. SRMCT-10821 or 9550425789"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               className="flex-1 px-4 py-3 text-sm rounded-xl border border-slate-200 bg-white font-mono font-semibold text-slate-900 outline-none focus:border-rose-600 shadow-sm"

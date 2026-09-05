@@ -54,14 +54,14 @@ function BookingFlowContent() {
   const [serviceType, setServiceType] = useState<'PICKUP_DROP' | 'DOORSTEP' | 'WORKSHOP'>('PICKUP_DROP');
 
   // Step 4: Location & Customer
-  const [customerName, setCustomerName] = useState<string>('Bikash Kalita');
-  const [customerPhone, setCustomerPhone] = useState<string>('9876543210');
-  const [customerEmail, setCustomerEmail] = useState<string>('bikash.kalita@example.com');
-  const [houseFlat, setHouseFlat] = useState<string>('Flat 4B, Silver Heights');
-  const [street, setStreet] = useState<string>('GS Road, Near Apollo');
-  const [area, setArea] = useState<string>('Christian Basti');
-  const [city, setCity] = useState<string>(currentCity || 'Guwahati');
-  const [pincode, setPincode] = useState<string>('781005');
+  const [customerName, setCustomerName] = useState<string>('Purna Rao');
+  const [customerPhone, setCustomerPhone] = useState<string>('9550425789');
+  const [customerEmail, setCustomerEmail] = useState<string>('customer@srmulticartech.com');
+  const [houseFlat, setHouseFlat] = useState<string>('Plot 12, Sri Sai Nilayam');
+  const [street, setStreet] = useState<string>('Near Main Road');
+  const [area, setArea] = useState<string>('Satrampadu');
+  const [city, setCity] = useState<string>(currentCity || 'Eluru, Andhra Pradesh');
+  const [pincode, setPincode] = useState<string>('534007');
   const [locationDetecting, setLocationDetecting] = useState<boolean>(false);
 
   // Step 5: Date & Slot

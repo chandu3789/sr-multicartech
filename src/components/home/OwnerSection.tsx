@@ -14,11 +14,26 @@ import {
   Sparkles,
   Search,
   Check,
-  Car
+  Car,
+  Star
 } from 'lucide-react';
 
 export default function OwnerSection() {
   const [activeTab, setActiveTab] = useState<'scan' | 'team' | 'philosophy'>('scan');
+  const [ownerPhoto, setOwnerPhoto] = useState<string>('/images/owner.jpg');
+
+  const handlePhotoUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        if (event.target?.result) {
+          setOwnerPhoto(event.target.result as string);
+        }
+      };
+      reader.readAsDataURL(file);
+    }
+  };
 
   const diagnosticSteps = [
     {
@@ -78,64 +93,113 @@ export default function OwnerSection() {
         {/* Main Grid: Founder Story (Left) + German Diagnostic Tech (Right) */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
           {/* Left Column: Founder & Leadership Story (5 Cols) */}
-          <div className="lg:col-span-5 rounded-3xl bg-gradient-to-b from-slate-800/90 to-slate-800/50 border border-slate-700/80 p-8 shadow-2xl flex flex-col justify-between relative overflow-hidden">
-            <div className="absolute top-0 right-0 w-32 h-32 bg-rose-500/10 rounded-full blur-2xl"></div>
+          <div className="lg:col-span-5 rounded-3xl bg-gradient-to-b from-slate-800/95 to-slate-900 border border-slate-700/80 p-6 sm:p-8 shadow-2xl flex flex-col justify-between relative overflow-hidden">
+            <div className="absolute top-0 right-0 w-48 h-48 bg-rose-500/10 rounded-full blur-3xl pointer-events-none"></div>
 
             <div>
-              {/* Founder Header Badge */}
-              <div className="flex items-center gap-4 mb-6">
-                <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-rose-600 to-rose-700 text-white flex items-center justify-center font-black text-2xl shadow-lg shadow-rose-600/30 border border-rose-400/30 flex-shrink-0">
-                  SR
+              {/* Founder Header & Portrait Card */}
+              <div className="flex flex-col sm:flex-row items-center sm:items-start gap-5 mb-6 pb-6 border-b border-slate-700/60">
+                {/* Framed Portrait with Gold Ring */}
+                <div className="relative group flex-shrink-0">
+                  <div className="w-28 h-28 sm:w-32 sm:h-32 rounded-2xl overflow-hidden border-2 border-amber-400/80 shadow-xl shadow-black/60 relative bg-slate-950">
+                    <img
+                      src={ownerPhoto}
+                      alt="Founder & Automotive Strategist - SR Multi Car Tech"
+                      className="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-500"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none"></div>
+                  </div>
+
+                  {/* Gold Verified Emblem */}
+                  <div className="absolute -bottom-2.5 -right-2.5 bg-gradient-to-r from-amber-500 to-amber-600 text-slate-950 p-1.5 rounded-full shadow-lg border-2 border-slate-900 flex items-center justify-center">
+                    <Award className="w-4 h-4 text-slate-950 fill-slate-950" />
+                  </div>
+
+                  {/* Quick User Upload Trigger */}
+                  <label
+                    htmlFor="owner-image-upload"
+                    className="absolute inset-0 bg-black/70 opacity-0 group-hover:opacity-100 rounded-2xl transition-opacity flex flex-col items-center justify-center cursor-pointer text-center p-2"
+                    title="Click to upload your custom owner photo"
+                  >
+                    <Sparkles className="w-5 h-5 text-amber-400 mb-1" />
+                    <span className="text-[10px] font-bold text-white uppercase tracking-wider">Change Photo</span>
+                    <span className="text-[8px] text-slate-300">Click to upload</span>
+                  </label>
+                  <input
+                    id="owner-image-upload"
+                    type="file"
+                    accept="image/*"
+                    className="hidden"
+                    onChange={handlePhotoUpload}
+                  />
                 </div>
-                <div>
-                  <div className="flex items-center gap-2">
-                    <h3 className="text-xl font-black text-white">Founder & Automotive Strategist</h3>
+
+                <div className="text-center sm:text-left flex-1">
+                  <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-amber-400/10 border border-amber-400/30 text-amber-300 text-[10px] font-bold uppercase tracking-wider mb-1.5">
+                    <Star className="w-3 h-3 fill-amber-400 text-amber-400" />
+                    <span>Visionary Founder & Strategist</span>
                   </div>
-                  <div className="text-xs font-semibold text-rose-400 mt-0.5 flex items-center gap-1.5">
-                    <ShieldCheck className="w-3.5 h-3.5" />
-                    <span>15+ Years Automotive Industry Leadership</span>
+
+                  <h3 className="text-xl font-black text-white tracking-tight">
+                    SR Multi Car Tech Founder
+                  </h3>
+
+                  <div className="text-xs font-semibold text-rose-400 mt-1 flex items-center justify-center sm:justify-start gap-1.5">
+                    <ShieldCheck className="w-4 h-4 text-rose-400 flex-shrink-0" />
+                    <span>15+ Years Automotive Mastery</span>
                   </div>
+
+                  <p className="text-[11px] text-slate-400 mt-1.5 leading-relaxed">
+                    Automotive Domain Specialist & Pioneer of German Diagnostic Telemetry in Satrampadu, Eluru.
+                  </p>
+                </div>
+              </div>
+
+              {/* IMPRESSIVE CITATION OF SUCCESS */}
+              <div className="p-5 rounded-2xl bg-gradient-to-br from-amber-500/10 via-slate-900/90 to-rose-500/10 border border-amber-400/30 shadow-lg relative my-5">
+                <div className="flex items-center gap-2 mb-2 text-amber-400 text-[11px] font-black uppercase tracking-wider">
+                  <Award className="w-4 h-4 text-amber-400" />
+                  <span>Official Citation of Visionary Success</span>
+                </div>
+
+                <div className="text-amber-400 font-serif text-3xl absolute -top-2 right-4 select-none opacity-30">&ldquo;</div>
+
+                <blockquote className="italic text-xs text-slate-200 leading-relaxed relative z-10 font-normal">
+                  Behind the phenomenal rise and enduring trust of SR Multi Car Tech stands a visionary automotive strategist whose 15+ years of relentless dedication transformed car care in Eluru. Foreseeing that modern vehicles are sophisticated mobile computers rather than mere mechanical frames, he united high-precision German diagnostic software with veteran master technicians. His uncompromising ethos of transparency, pinpoint accuracy, and customer devotion is the cornerstone behind our wonderful success story.
+                </blockquote>
+
+                <div className="mt-3 pt-2.5 border-t border-amber-400/20 flex items-center justify-between text-[11px]">
+                  <span className="font-bold text-amber-300">Tribute to Visionary Leadership</span>
+                  <span className="text-slate-400 text-[10px]">Satrampadu, Eluru</span>
                 </div>
               </div>
 
               {/* Core Philosophy Highlights */}
-              <div className="space-y-4 text-xs sm:text-sm text-slate-300 leading-relaxed">
+              <div className="space-y-3 text-xs text-slate-300 leading-relaxed">
                 <p>
-                  <strong className="text-white font-bold">Deep Automotive Intelligence, Not Guesswork:</strong> With over 15 years immersed in modern car engineering, our founder recognized that modern automobiles are intricate computers on wheels.
+                  <strong className="text-white font-bold">Domain Knowledge Over Guesswork:</strong> With over 15 years immersed in multi-brand car technology, he is not a traditional grease-mechanic, but an automotive systems leader.
                 </p>
-
                 <p>
-                  Rather than relying on outdated trial-and-error, he established a technology-first workshop standard: combining <strong className="text-rose-400">German OEM diagnostic software</strong> with a dedicated squad of <strong className="text-white font-bold">certified master technicians</strong> who have 10+ years of hands-on precision repair expertise.
+                  He personally supervises all diagnostic scan parameters and commands our team of <strong className="text-white">certified master technicians</strong> to ensure factory-calibrated repairs on every single vehicle.
                 </p>
-
-                {/* Founder Quote Card */}
-                <div className="p-4 rounded-2xl bg-slate-900/80 border border-slate-700/60 my-5 relative">
-                  <div className="text-amber-400 font-serif text-3xl absolute top-1 left-2 select-none opacity-50">&ldquo;</div>
-                  <blockquote className="italic text-xs sm:text-sm text-slate-200 pl-4 relative z-10 font-medium">
-                    Modern cars can’t be solved with a hammer and a wrench alone. When you plug German software into the ECU, the car reveals its exact problem in seconds. We diagnose accurately, and our veteran technicians fix it right the first time.
-                  </blockquote>
-                  <div className="text-[11px] font-bold text-rose-400 mt-2 pl-4">
-                    — Founder, SR Multi Car Tech
-                  </div>
-                </div>
               </div>
             </div>
 
             {/* 4 Trust Numbers Grid */}
             <div className="grid grid-cols-2 gap-3 pt-6 border-t border-slate-700/60 mt-6">
-              <div className="p-3.5 rounded-2xl bg-slate-900/60 border border-slate-800">
+              <div className="p-3 rounded-xl bg-slate-900/70 border border-slate-800">
                 <div className="text-2xl font-black text-rose-500">15+</div>
                 <div className="text-[11px] text-slate-400 font-medium mt-0.5">Years Automotive Knowledge</div>
               </div>
-              <div className="p-3.5 rounded-2xl bg-slate-900/60 border border-slate-800">
+              <div className="p-3 rounded-xl bg-slate-900/70 border border-slate-800">
                 <div className="text-2xl font-black text-amber-400">100%</div>
                 <div className="text-[11px] text-slate-400 font-medium mt-0.5">German Diagnostic Telemetry</div>
               </div>
-              <div className="p-3.5 rounded-2xl bg-slate-900/60 border border-slate-800">
+              <div className="p-3 rounded-xl bg-slate-900/70 border border-slate-800">
                 <div className="text-2xl font-black text-emerald-400">25+</div>
                 <div className="text-[11px] text-slate-400 font-medium mt-0.5">Certified Master Technicians</div>
               </div>
-              <div className="p-3.5 rounded-2xl bg-slate-900/60 border border-slate-800">
+              <div className="p-3 rounded-xl bg-slate-900/70 border border-slate-800">
                 <div className="text-2xl font-black text-blue-400">15,000+</div>
                 <div className="text-[11px] text-slate-400 font-medium mt-0.5">Cars Successfully Cured</div>
               </div>

@@ -33,11 +33,11 @@ export default function CtaBanner() {
             </Link>
 
             <a
-              href="tel:+919876543210"
+              href="tel:+919550425789"
               className="w-full sm:w-auto px-7 py-4 rounded-xl bg-rose-900/60 hover:bg-rose-900 text-white font-bold text-sm border border-white/20 transition-all flex items-center justify-center gap-2"
             >
               <Phone className="w-4 h-4" />
-              <span>Call Helpline: +91 98765 43210</span>
+              <span>Call Helpline: +91 95504 25789</span>
             </a>
           </div>
 

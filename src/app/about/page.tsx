@@ -1,10 +1,24 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
-import { ShieldCheck, Award, Users, Wrench, CheckCircle2, HeartHandshake, ArrowRight, Cpu, Star, Clock } from 'lucide-react';
+import { ShieldCheck, Award, Users, Wrench, CheckCircle2, HeartHandshake, ArrowRight, Cpu, Star, Clock, MapPin, Navigation, Phone, Sparkles } from 'lucide-react';
 
 export default function AboutPage() {
+  const [ownerPhoto, setOwnerPhoto] = useState<string>('/images/owner.jpg');
+
+  const handlePhotoUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        if (event.target?.result) {
+          setOwnerPhoto(event.target.result as string);
+        }
+      };
+      reader.readAsDataURL(file);
+    }
+  };
   return (
     <div className="min-h-screen bg-slate-50 py-16">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
@@ -22,30 +36,91 @@ export default function AboutPage() {
         </div>
 
         {/* FOUNDER & LEADERSHIP STORY */}
-        <div className="p-8 sm:p-10 rounded-3xl bg-slate-900 text-white shadow-xl border border-slate-800 space-y-6 relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-80 h-80 bg-rose-600/10 rounded-full blur-3xl pointer-events-none"></div>
+        <div className="p-8 sm:p-12 rounded-3xl bg-slate-900 text-white shadow-2xl border border-slate-800 space-y-8 relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-96 h-96 bg-rose-600/10 rounded-full blur-3xl pointer-events-none"></div>
 
-          <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6 pb-6 border-b border-slate-800">
-            <div className="flex items-center gap-4">
-              <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-rose-600 to-rose-700 text-white font-black text-2xl flex items-center justify-center shadow-lg shadow-rose-600/30 flex-shrink-0">
-                SR
+          {/* Portrait & Title Header */}
+          <div className="relative z-10 flex flex-col md:flex-row items-center md:items-start justify-between gap-6 pb-8 border-b border-slate-800">
+            <div className="flex flex-col sm:flex-row items-center sm:items-start gap-6 text-center sm:text-left">
+              {/* Framed Owner Portrait */}
+              <div className="relative group flex-shrink-0">
+                <div className="w-32 h-32 sm:w-36 sm:h-36 rounded-2xl overflow-hidden border-2 border-amber-400 shadow-2xl shadow-black/80 relative bg-slate-950">
+                  <img
+                    src={ownerPhoto}
+                    alt="Founder & Automotive Strategist - SR Multi Car Tech"
+                    className="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-500"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none"></div>
+                </div>
+
+                {/* Gold Crest */}
+                <div className="absolute -bottom-2.5 -right-2.5 bg-gradient-to-r from-amber-500 to-amber-600 text-slate-950 p-1.5 rounded-full shadow-lg border-2 border-slate-900">
+                  <Award className="w-4 h-4 text-slate-950 fill-slate-950" />
+                </div>
+
+                {/* Image Upload Trigger */}
+                <label
+                  htmlFor="about-owner-upload"
+                  className="absolute inset-0 bg-black/70 opacity-0 group-hover:opacity-100 rounded-2xl transition-opacity flex flex-col items-center justify-center cursor-pointer text-center p-2"
+                  title="Upload / Change Owner Photo"
+                >
+                  <Sparkles className="w-5 h-5 text-amber-400 mb-1" />
+                  <span className="text-[10px] font-bold text-white uppercase tracking-wider">Change Photo</span>
+                  <span className="text-[8px] text-slate-300">Click to upload</span>
+                </label>
+                <input
+                  id="about-owner-upload"
+                  type="file"
+                  accept="image/*"
+                  className="hidden"
+                  onChange={handlePhotoUpload}
+                />
               </div>
+
               <div>
-                <span className="text-[10px] font-bold uppercase tracking-wider text-rose-400 block">Founder & Chief Automotive Strategist</span>
-                <h2 className="text-2xl font-black text-white">15+ Years Automotive Industry Expertise</h2>
+                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-400/10 border border-amber-400/30 text-amber-300 text-[11px] font-bold uppercase tracking-wider mb-2">
+                  <Award className="w-3.5 h-3.5" />
+                  <span>Founder & Automotive Strategist</span>
+                </div>
+                <h2 className="text-2xl sm:text-3xl font-black text-white tracking-tight">
+                  15+ Years Automotive Industry Expertise
+                </h2>
+                <div className="text-xs sm:text-sm font-semibold text-rose-400 mt-1 flex items-center justify-center sm:justify-start gap-1.5">
+                  <ShieldCheck className="w-4 h-4 text-rose-400 flex-shrink-0" />
+                  <span>Visionary Leadership • Satrampadu, Eluru, Andhra Pradesh</span>
+                </div>
               </div>
             </div>
 
-            <div className="flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-800 border border-slate-700 text-amber-400 text-xs font-bold self-start md:self-auto">
+            <div className="flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-800 border border-slate-700 text-amber-400 text-xs font-bold self-center md:self-start">
               <Star className="w-3.5 h-3.5 fill-amber-400" />
-              <span>Domain Strategist &bull; Certified Master Fleet</span>
+              <span>Diagnostic Pioneer</span>
+            </div>
+          </div>
+
+          {/* IMPRESSIVE CITATION CARD */}
+          <div className="relative z-10 p-6 sm:p-7 rounded-2xl bg-gradient-to-br from-amber-500/10 via-slate-900/95 to-rose-500/10 border border-amber-400/30 shadow-xl">
+            <div className="flex items-center gap-2 mb-3 text-amber-400 text-xs font-black uppercase tracking-wider">
+              <Award className="w-4 h-4 text-amber-400" />
+              <span>Official Citation of Visionary Leadership & Wonderful Success</span>
+            </div>
+
+            <div className="text-amber-400 font-serif text-4xl absolute -top-3 right-6 select-none opacity-25">&ldquo;</div>
+
+            <blockquote className="italic text-xs sm:text-sm text-slate-200 leading-relaxed relative z-10 font-normal">
+              Behind the extraordinary success and sterling reputation of SR Multi Car Tech stands a visionary leader whose 15+ years of comprehensive automotive mastery redefined vehicle maintenance. Rejecting crude mechanical trial-and-error, he championed modern automotive computer diagnostics, equipping our flagship facility with genuine German telemetry software and commanding an elite team of certified master technicians. His unbending commitment to honest pricing, technical perfection, and customer transparency has cured over 15,000+ cars and established SR Multi Car Tech as Andhra Pradesh’s gold standard in automotive excellence.
+            </blockquote>
+
+            <div className="mt-4 pt-3 border-t border-amber-400/20 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 text-xs">
+              <span className="font-bold text-amber-300">Honoring the Visionary Behind SR Multi Car Tech</span>
+              <span className="text-slate-400 text-[11px]">Satrampadu, Eluru &bull; Helpline: +91 95504 25789</span>
             </div>
           </div>
 
           <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-6 text-xs sm:text-sm text-slate-300 leading-relaxed">
             <div className="space-y-3">
               <p>
-                <strong className="text-white">Not a Traditional Mechanic:</strong> Our founder is an automotive domain strategist with deep technical mastery over electronic architectures, engine ECU mappings, and modern vehicle diagnostics.
+                <strong className="text-white">Not a Traditional Mechanic:</strong> Our founder is an automotive domain strategist with deep technical mastery over electronic architectures, engine ECU mappings, CAN-bus networks, and modern vehicle diagnostics.
               </p>
               <p>
                 Having spent over 15 years immersed in multi-brand car technology, he realized that modern vehicles are complex computers on wheels that cannot be fixed by guesswork or random part replacements.
@@ -133,6 +208,42 @@ export default function AboutPage() {
               <h3 className="font-bold text-sm">Automated Lifts & Aligners</h3>
               <p className="text-xs text-slate-400">High-capacity electro-hydraulic ramps and 3D laser alignment sensors.</p>
             </div>
+          </div>
+        </div>
+
+        {/* WORKSHOP LOCATION & DIRECTIONS */}
+        <div className="p-8 sm:p-10 rounded-3xl bg-white border border-slate-200/90 shadow-lg flex flex-col md:flex-row items-center justify-between gap-6">
+          <div className="space-y-2 text-center md:text-left">
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-rose-50 text-rose-600 border border-rose-100 text-xs font-bold uppercase tracking-wider">
+              <MapPin className="w-3.5 h-3.5" />
+              <span>Satrampadu, Eluru Flagship Workshop</span>
+            </div>
+            <h3 className="text-2xl font-black text-slate-900">
+              Visit Our German Diagnostic Lab in Person
+            </h3>
+            <p className="text-xs sm:text-sm text-slate-600 max-w-xl">
+              Located near Main Road, Satrampadu, Eluru, Andhra Pradesh - 534007. Direct helpline: <strong>+91 95504 25789</strong>. Open Monday through Sunday with valet pickup options.
+            </p>
+          </div>
+
+          <div className="flex flex-col sm:flex-row items-center gap-3 w-full md:w-auto flex-shrink-0">
+            <a
+              href="https://www.google.com/maps/search/?api=1&query=SR+Multi+Car+Tech+Satrampadu+Eluru+Andhra+Pradesh"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-gradient-to-r from-rose-600 to-rose-700 hover:from-rose-500 hover:to-rose-600 text-white font-black text-xs shadow-lg shadow-rose-600/30 transition-all flex items-center justify-center gap-2"
+            >
+              <Navigation className="w-4 h-4 text-white" />
+              <span>Get Directions to Workshop</span>
+            </a>
+
+            <a
+              href="tel:+919550425789"
+              className="w-full sm:w-auto px-5 py-3.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold text-xs transition-all flex items-center justify-center gap-2"
+            >
+              <Phone className="w-4 h-4 text-rose-600" />
+              <span>Call 9550425789</span>
+            </a>
           </div>
         </div>
 

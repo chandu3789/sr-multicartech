@@ -437,7 +437,40 @@ export const SERVICE_PACKAGES: ServicePackageItem[] = [
     ]
   },
 
-  // Car Spa
+  // Car Spa & Detailing
+  {
+    id: 'srv-car-wash-premium',
+    slug: 'car-wash-premium',
+    categoryId: 'car-spa-cleaning',
+    categoryName: 'Car Spa & Detailing',
+    title: 'Car Wash Premium',
+    tagline: 'High-pressure underbody wash, thick snow foam bath & interior vacuum.',
+    shortDesc: 'Comprehensive exterior snow foam bath, chassis & underbody high-pressure mud blast, interior cabin vacuuming, dashboard UV polish, alloy decontamination & tyre gloss shield.',
+    startingPrice: 699,
+    originalPrice: 1199,
+    estimatedHours: 1.5,
+    warranty: '100% Spotless Glow Guarantee',
+    recommendedFrequency: 'Every 2 to 4 Weeks',
+    rating: 4.9,
+    reviewsCount: 428,
+    popular: true,
+    doorstepAvailable: true,
+    pickupDropAvailable: true,
+    whatsIncluded: [
+      'High-Pressure Underbody & Wheel Arch Mud Blasting',
+      'pH-Neutral Snow Foam Body Bath & Microfiber Hand Wash',
+      'High-Power Interior Cabin, Footwell & Boot Vacuuming',
+      'Alloy Wheel Decontamination & Deep Rim Cleaning',
+      'Dashboard, Console & Door Trim Satin UV Polish',
+      'Crystal Streak-Free Glass & Windshield Anti-Glare Clean',
+      'Tyre Deep Scrubbing with Long-Lasting Silicone Gloss',
+      'AC Vent Dusting & Refreshing Cabin Deodorizer'
+    ],
+    whatsNotIncluded: [
+      '3-stage exterior paint scratch compounding (available in Ceramic Coating)',
+      'Complete seat shampoo hot water extraction (available in Deep Interior Cleaning)'
+    ]
+  },
   {
     id: 'srv-deep-interior-cleaning',
     slug: '360-interior-deep-cleaning',
