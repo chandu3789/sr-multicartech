@@ -94,10 +94,10 @@ export default function ContactPage() {
               <span className="text-[10px] font-bold uppercase text-rose-400">Headquarters Workshop</span>
               <h4 className="font-bold text-base">SR Multi Car Tech Central Hub</h4>
               <p className="text-xs text-slate-300 leading-relaxed">
-                Plot 42, Auto Zone, GS Road, Christian Basti, Guwahati, Assam 781005
+                Plot 14, Auto Nagar, Sanivarapupeta Road, Eluru, Andhra Pradesh 534001
               </p>
               <div className="text-xs text-slate-400">
-                Landmark: Opposite Apollo Telemedicine Center, NH-27
+                Landmark: Near Sanivarapupeta Junction & Powerpet Road, Eluru
               </div>
             </div>
           </div>

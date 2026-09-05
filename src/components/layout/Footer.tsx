@@ -76,7 +76,7 @@ export default function Footer() {
               <div className="flex items-start gap-2.5 pt-1">
                 <MapPin className="w-4 h-4 text-rose-500 flex-shrink-0 mt-0.5" />
                 <span className="text-slate-400">
-                  Plot 42, Auto Hub Zone, NH-27, Christian Basti, Guwahati, Assam 781005
+                  Plot 14, Auto Nagar, Sanivarapupeta Road, Eluru, Andhra Pradesh 534001
                 </span>
               </div>
               <div className="flex items-center gap-2.5 pt-1">

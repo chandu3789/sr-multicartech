@@ -200,8 +200,8 @@ export default function QuickBookingWidget() {
               <MapPin className="w-3.5 h-3.5 text-rose-600" />
               5. Service Location
             </label>
-            <div className="flex items-center px-3.5 py-2.5 rounded-xl border border-slate-200 bg-slate-50 text-slate-800 text-sm font-semibold">
-              <span className="truncate">{currentCity} (Citywide Free Pickup)</span>
+            <div className="flex items-center px-3.5 py-2.5 rounded-xl border border-slate-200 bg-slate-50 text-slate-800 text-xs font-bold">
+              <span className="truncate">Eluru, Andhra Pradesh (Free Doorstep Pickup)</span>
             </div>
           </div>
 

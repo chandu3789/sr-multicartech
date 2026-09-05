@@ -12,13 +12,16 @@ interface CityContextType {
 const CityContext = createContext<CityContextType | undefined>(undefined);
 
 export function CityProvider({ children }: { children: React.ReactNode }) {
-  const [currentCity, setCurrentCity] = useState<string>('Guwahati');
+  const [currentCity, setCurrentCity] = useState<string>('Eluru, Andhra Pradesh');
 
   useEffect(() => {
     try {
       const stored = localStorage.getItem('srmct_city');
-      if (stored) {
+      if (stored && stored !== 'Guwahati') {
         setCurrentCity(stored);
+      } else {
+        setCurrentCity('Eluru, Andhra Pradesh');
+        localStorage.setItem('srmct_city', 'Eluru, Andhra Pradesh');
       }
     } catch (e) {
       console.warn(e);

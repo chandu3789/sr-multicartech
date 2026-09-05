@@ -13,97 +13,113 @@ export default function Logo({ className = '', showTagline = true, variant = 'li
   const isDark = variant === 'dark';
 
   return (
-    <Link href="/" className={`inline-flex items-center gap-3 group select-none ${className}`}>
-      {/* High-End Precision Automotive Emblem */}
-      <div className="relative w-11 h-11 sm:w-12 sm:h-12 flex-shrink-0 flex items-center justify-center rounded-2xl bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 p-1 border border-slate-700/80 shadow-lg shadow-rose-950/30 group-hover:scale-105 group-hover:border-rose-500/50 transition-all duration-300">
-        {/* Aerodynamic Speed SVG Mark */}
+    <Link href="/" className={`inline-flex items-center gap-3 group select-none whitespace-nowrap ${className}`}>
+      {/* 3D High-Gloss Automotive Emblem Crest */}
+      <div className="relative w-12 h-12 flex-shrink-0 flex items-center justify-center rounded-2xl bg-gradient-to-br from-slate-950 via-slate-900 to-rose-950 p-1 border-2 border-rose-600/40 shadow-xl shadow-rose-900/30 group-hover:scale-105 group-hover:border-rose-500 group-hover:shadow-rose-600/40 transition-all duration-300">
         <svg
-          viewBox="0 0 56 56"
+          viewBox="0 0 64 64"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
-          className="w-full h-full"
+          className="w-full h-full drop-shadow-md"
         >
           <defs>
-            {/* Crimson Red Metallic Gradient */}
-            <linearGradient id="srCrimson" x1="0%" y1="0%" x2="100%" y2="100%">
+            {/* Rich Crimson Performance Gradient */}
+            <linearGradient id="crestRed" x1="0%" y1="0%" x2="100%" y2="100%">
               <stop offset="0%" stopColor="#f43f5e" />
-              <stop offset="50%" stopColor="#e11d48" />
-              <stop offset="100%" stopColor="#9f1239" />
+              <stop offset="45%" stopColor="#e11d48" />
+              <stop offset="100%" stopColor="#881337" />
             </linearGradient>
 
-            {/* Chrome Silver Gradient */}
-            <linearGradient id="srSilver" x1="0%" y1="0%" x2="100%" y2="100%">
+            {/* Polished Chrome Silver Gradient */}
+            <linearGradient id="crestChrome" x1="0%" y1="0%" x2="100%" y2="100%">
               <stop offset="0%" stopColor="#ffffff" />
-              <stop offset="60%" stopColor="#cbd5e1" />
-              <stop offset="100%" stopColor="#64748b" />
+              <stop offset="35%" stopColor="#e2e8f0" />
+              <stop offset="70%" stopColor="#94a3b8" />
+              <stop offset="100%" stopColor="#cbd5e1" />
             </linearGradient>
 
-            {/* Glowing Amber Telemetry */}
-            <linearGradient id="srGold" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#fbbf24" />
-              <stop offset="100%" stopColor="#d97706" />
+            {/* Metallic Gold Diagnostic Pulse */}
+            <linearGradient id="crestGold" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="#fef08a" />
+              <stop offset="50%" stopColor="#f59e0b" />
+              <stop offset="100%" stopColor="#b45309" />
+            </linearGradient>
+
+            {/* Specular Light Reflection */}
+            <linearGradient id="glassSheen" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stopColor="#ffffff" stopOpacity="0.4" />
+              <stop offset="50%" stopColor="#ffffff" stopOpacity="0.05" />
+              <stop offset="100%" stopColor="#ffffff" stopOpacity="0" />
             </linearGradient>
           </defs>
 
-          {/* Outer Hexagonal Aerodynamic Shield */}
+          {/* Outer Chrome Bezel */}
           <path
-            d="M28 4L48 12V30C48 41.5 39.5 48.5 28 52C16.5 48.5 8 41.5 8 30V12L28 4Z"
-            fill="url(#srCrimson)"
-            stroke="url(#srSilver)"
-            strokeWidth="1.5"
+            d="M32 4L54 13V34C54 46.5 44.5 54.5 32 59C19.5 54.5 10 46.5 10 34V13L32 4Z"
+            fill="url(#crestRed)"
+            stroke="url(#crestChrome)"
+            strokeWidth="2.5"
             strokeLinejoin="round"
-            className="opacity-95"
           />
 
-          {/* Internal Precision Bevel */}
+          {/* Top Glass Reflection Sheen */}
           <path
-            d="M28 8L44 14.5V29.5C44 38.5 37 44.5 28 47.5C19 44.5 12 38.5 12 29.5V14.5L28 8Z"
+            d="M32 6L51 14.5V28C44 26 20 26 13 28V14.5L32 6Z"
+            fill="url(#glassSheen)"
+          />
+
+          {/* Inner Obsidian Carbon Recess */}
+          <path
+            d="M32 10L48 17V33C48 42.5 40.5 48.5 32 52C23.5 48.5 16 42.5 16 33V17L32 10Z"
             fill="#090d16"
             stroke="#1e293b"
-            strokeWidth="1"
+            strokeWidth="1.2"
           />
 
-          {/* Stylized "S" Dynamic Speed Wing */}
+          {/* Sculpted "S" Speed Wing (Left) */}
           <path
-            d="M19 20C19 16.5 23 15 28 15C33 15 36.5 17 36 20.5C35.5 23.5 29.5 24.5 26.5 26.5C23.5 28.5 22 31 23 34C24 37 28 38 33 37C35.5 36.5 37 35 37 35"
-            stroke="url(#srSilver)"
+            d="M21 22C21 18 26 16.5 31 16.5C36 16.5 40 18.5 39.5 22C39 25 33 26.5 29 28.5C25 30.5 23.5 33.5 25 37C26.5 40 31 41 36 39.5C39 38.5 41 37 41 37"
+            stroke="url(#crestChrome)"
+            strokeWidth="3.6"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+
+          {/* Bold "R" Performance Strut (Right) */}
+          <path
+            d="M31 20V40M31 29H38C41 29 43 27 43 24.5C43 22 41 20 38 20H31M36 29L43 40"
+            stroke="url(#crestRed)"
             strokeWidth="3.2"
             strokeLinecap="round"
             strokeLinejoin="round"
           />
 
-          {/* Stylized "R" Aerodynamic Strut */}
-          <path
-            d="M28 19V36M28 27H34C36.5 27 38 25.5 38 23C38 20.5 36.5 19 34 19H28M32 27L38 36"
-            stroke="url(#srCrimson)"
-            strokeWidth="2.8"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-
-          {/* Central German Diagnostic Telemetry Pulse Point */}
-          <circle cx="28" cy="23" r="2.2" fill="url(#srGold)" />
-          <circle cx="28" cy="23" r="4.5" stroke="url(#srGold)" strokeWidth="0.8" opacity="0.6" />
+          {/* Precision German Diagnostic Telemetry Laser Pulse */}
+          <circle cx="32" cy="24.5" r="2.8" fill="url(#crestGold)" />
+          <circle cx="32" cy="24.5" r="5.5" stroke="url(#crestGold)" strokeWidth="1" opacity="0.8" />
         </svg>
       </div>
 
       {/* Brand Typography */}
       <div className="flex flex-col justify-center">
-        <div className="flex items-center gap-1.5 leading-none">
-          <span className="text-xl sm:text-2xl font-black tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-rose-600 to-rose-700 font-sans">
+        <div className="flex items-baseline leading-none">
+          <span className="text-2xl font-black italic tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-rose-600 via-rose-500 to-rose-700 font-sans">
             SR
           </span>
-          <span className={`text-base sm:text-lg font-black tracking-tight ${isDark ? 'text-white' : 'text-slate-900'}`}>
+          <span className={`text-lg font-black tracking-wider uppercase ml-1.5 font-sans ${isDark ? 'text-white' : 'text-slate-950'}`}>
             MULTI CAR TECH
           </span>
         </div>
 
         {showTagline && (
-          <div className="flex items-center gap-1.5 mt-0.5">
-            <span className={`text-[9px] sm:text-[10px] font-bold tracking-wider uppercase ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>
-              German Diagnostics & Car Care
+          <div className="flex items-center gap-1.5 mt-1 leading-none">
+            <span className="text-[9px] font-extrabold tracking-[0.16em] uppercase text-rose-600">
+              GERMAN DIAGNOSTICS
             </span>
-            <span className="w-1 h-1 rounded-full bg-rose-600"></span>
+            <span className="w-1 h-1 rounded-full bg-slate-400"></span>
+            <span className={`text-[9px] font-bold tracking-[0.14em] uppercase ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>
+              CAR CARE
+            </span>
           </div>
         )}
       </div>
