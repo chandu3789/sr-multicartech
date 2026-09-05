@@ -212,12 +212,12 @@ export default function Header() {
               </nav>
 
               {/* Right: Quick Tools & Primary Booking CTA (Never Overcrowded) */}
-              <div className="flex items-center gap-3 flex-shrink-0">
+              <div className="flex items-center gap-2 sm:gap-3 flex-shrink-0">
                 {/* Compact Search Trigger */}
                 <button
                   type="button"
                   onClick={() => setSearchOpen(true)}
-                  className="p-2.5 text-slate-600 hover:text-rose-600 bg-slate-100 hover:bg-slate-200 rounded-xl transition-colors cursor-pointer"
+                  className="p-2 sm:p-2.5 text-slate-600 hover:text-rose-600 bg-slate-100 hover:bg-slate-200 rounded-xl transition-colors cursor-pointer"
                   title="Search services, car models, FAQs (Ctrl+K)"
                   aria-label="Search"
                 >
@@ -227,20 +227,21 @@ export default function Header() {
                 {/* Primary CTA: Book Service Button (Always prominent, never cut off) */}
                 <Link
                   href="/book-service"
-                  className="inline-flex items-center justify-center px-5 sm:px-6 py-3 text-xs sm:text-sm font-black text-white bg-gradient-to-r from-rose-600 to-rose-700 hover:from-rose-700 hover:to-rose-800 rounded-xl shadow-lg shadow-rose-600/30 hover:shadow-rose-600/40 hover:-translate-y-0.5 active:translate-y-0 transition-all whitespace-nowrap cursor-pointer"
+                  className="inline-flex items-center justify-center px-3.5 sm:px-6 py-2.5 sm:py-3 text-xs sm:text-sm font-black text-white bg-gradient-to-r from-rose-600 to-rose-700 hover:from-rose-700 hover:to-rose-800 rounded-xl shadow-lg shadow-rose-600/30 hover:shadow-rose-600/40 hover:-translate-y-0.5 active:translate-y-0 transition-all whitespace-nowrap cursor-pointer"
                 >
-                  <CalendarCheck className="w-4 h-4 mr-2 flex-shrink-0" />
-                  <span>Book Service</span>
+                  <CalendarCheck className="w-3.5 h-3.5 sm:w-4 sm:h-4 sm:mr-2 flex-shrink-0" />
+                  <span className="hidden sm:inline">Book Service</span>
+                  <span className="sm:hidden">Book</span>
                 </Link>
 
                 {/* Mobile Hamburger Button */}
                 <button
                   type="button"
                   onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                  className="p-2.5 lg:hidden text-slate-800 hover:text-rose-600 rounded-xl hover:bg-slate-100 transition-colors cursor-pointer"
+                  className="p-2 sm:p-2.5 lg:hidden text-slate-800 hover:text-rose-600 rounded-xl hover:bg-slate-100 transition-colors cursor-pointer"
                   aria-label="Toggle Navigation Menu"
                 >
-                  {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+                  {mobileMenuOpen ? <X className="w-5 h-5 sm:w-6 sm:h-6" /> : <Menu className="w-5 h-5 sm:w-6 sm:h-6" />}
                 </button>
               </div>
             </div>
@@ -279,13 +280,18 @@ export default function Header() {
               <div className="flex items-center gap-2.5">
                 <MapPin className="w-4 h-4 text-rose-600 flex-shrink-0" />
                 <div>
-                  <div className="text-xs font-black text-slate-900">Eluru, Andhra Pradesh</div>
-                  <div className="text-[10px] text-slate-500">Plot 14, Auto Nagar, Sanivarapupeta Road</div>
+                  <div className="text-xs font-black text-slate-900">Satrampadu, Eluru</div>
+                  <div className="text-[10px] text-slate-500">Near Main Road, Satrampadu (534007)</div>
                 </div>
               </div>
-              <span className="text-[10px] font-black uppercase tracking-wider px-2 py-0.5 rounded-full bg-rose-100 text-rose-700">
-                Main Facility
-              </span>
+              <a
+                href="https://www.google.com/maps/search/?api=1&query=SR+Multi+Car+Tech+Satrampadu+Eluru+Andhra+Pradesh"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[10px] font-black uppercase tracking-wider px-2.5 py-1 rounded-full bg-rose-100 text-rose-700 hover:bg-rose-200 transition-colors"
+              >
+                Directions
+              </a>
             </div>
 
             {/* Mobile Nav Links */}
