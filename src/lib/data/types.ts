@@ -12,9 +12,10 @@ export interface CarBrand {
 export interface CarModel {
   id: string;
   name: string;
-  bodyType: 'Hatchback' | 'Sedan' | 'SUV' | 'MUV' | 'Luxury';
+  bodyType: 'Hatchback' | 'Sedan' | 'SUV' | 'MUV' | 'Luxury' | 'EV' | 'Coupe';
   fuels: ('Petrol' | 'Diesel' | 'CNG' | 'Electric' | 'Hybrid')[];
   years: number[];
+  popular?: boolean;
 }
 
 export interface ServicePackageItem {

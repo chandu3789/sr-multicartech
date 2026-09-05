@@ -22,6 +22,9 @@ function CarSelectorContent() {
   const [activeFuel, setActiveFuel] = useState<string>(currentCar?.fuel || 'Petrol');
   const [activeYear, setActiveYear] = useState<number>(currentCar?.year || 2022);
   const [searchBrand, setSearchBrand] = useState('');
+  const [searchModel, setSearchModel] = useState('');
+  const [modelFilter, setModelFilter] = useState<string>('ALL');
+  const [sortBy, setSortBy] = useState<'ALPHA' | 'POPULAR'>('POPULAR');
 
   // Selected Brand Object
   const brandObj = CAR_BRANDS.find(b => b.name.toLowerCase() === activeBrand.toLowerCase()) || CAR_BRANDS[1];
@@ -225,50 +228,164 @@ function CarSelectorContent() {
           )}
 
           {/* STEP 2: Model Selection */}
-          {step === 2 && (
-            <div className="space-y-6 animate-in fade-in duration-200">
-              <div className="flex items-center justify-between">
-                <div>
-                  <h3 className="font-bold text-slate-900 text-lg">
-                    Select Model for <span className="text-rose-600">{activeBrand}</span>
-                  </h3>
-                  <p className="text-xs text-slate-500">Pick your specific vehicle model</p>
-                </div>
-                <button
-                  onClick={() => setStep(1)}
-                  className="text-xs font-semibold text-rose-600 hover:underline"
-                >
-                  ← Change Brand
-                </button>
-              </div>
+          {step === 2 && (() => {
+            const availableBodyTypes = Array.from(new Set(brandObj.models.map(m => m.bodyType)));
 
-              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-                {brandObj.models.map((model) => (
-                  <button
-                    key={model.id}
-                    onClick={() => handleModelSelect(model.name)}
-                    className={`p-5 rounded-2xl border text-left transition-all flex flex-col justify-between group cursor-pointer ${
-                      activeModel === model.name
-                        ? 'bg-rose-50/60 border-rose-500 shadow-md'
-                        : 'bg-white border-slate-200/80 hover:border-rose-300 hover:shadow-sm'
-                    }`}
-                  >
-                    <div>
-                      <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-slate-100 text-slate-600">
-                        {model.bodyType}
+            const filteredModels = brandObj.models.filter(m => {
+              const matchesSearch = !searchModel || m.name.toLowerCase().includes(searchModel.toLowerCase().trim());
+              const matchesType = modelFilter === 'ALL' || m.bodyType === modelFilter;
+              return matchesSearch && matchesType;
+            });
+
+            // Order models: if popular first, sort by popular then alphabetical; if alpha, sort A-Z
+            const orderedModels = [...filteredModels].sort((a, b) => {
+              if (sortBy === 'POPULAR') {
+                if (a.popular && !b.popular) return -1;
+                if (!a.popular && b.popular) return 1;
+              }
+              return a.name.localeCompare(b.name);
+            });
+
+            return (
+              <div className="space-y-6 animate-in fade-in duration-200">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 pb-4">
+                  <div>
+                    <h3 className="font-black text-slate-900 text-xl flex items-center gap-2">
+                      <span>Select Model for</span>
+                      <span className="text-rose-600">{activeBrand}</span>
+                      <span className="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-600">
+                        {brandObj.models.length} Models
                       </span>
-                      <h4 className="font-bold text-slate-900 text-base mt-2 group-hover:text-rose-600 transition-colors">
-                        {model.name}
-                      </h4>
-                    </div>
-                    <div className="text-[11px] text-slate-400 mt-3">
-                      Fuels: {model.fuels.join(', ')}
-                    </div>
-                  </button>
-                ))}
+                    </h3>
+                    <p className="text-xs text-slate-500 mt-0.5">All models organized in order by segment & popularity</p>
+                  </div>
+
+                  <div className="flex items-center gap-2">
+                    <button
+                      onClick={() => setStep(1)}
+                      className="text-xs font-bold text-slate-500 hover:text-slate-800 px-3 py-1.5 rounded-lg border border-slate-200 hover:bg-slate-50"
+                    >
+                      ← Change Brand
+                    </button>
+                  </div>
+                </div>
+
+                {/* Search and Segment Filter Bar */}
+                <div className="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-3 bg-slate-50 p-3 rounded-2xl border border-slate-200/80">
+                  {/* Body Type Pills */}
+                  <div className="flex items-center gap-1.5 overflow-x-auto pb-1 md:pb-0 text-xs font-bold">
+                    <button
+                      type="button"
+                      onClick={() => setModelFilter('ALL')}
+                      className={`px-3 py-1.5 rounded-xl whitespace-nowrap transition-all ${
+                        modelFilter === 'ALL'
+                          ? 'bg-rose-600 text-white shadow-sm'
+                          : 'bg-white text-slate-700 hover:bg-slate-200/70 border border-slate-200/70'
+                      }`}
+                    >
+                      All ({brandObj.models.length})
+                    </button>
+
+                    {availableBodyTypes.map((type) => {
+                      const count = brandObj.models.filter(m => m.bodyType === type).length;
+                      return (
+                        <button
+                          key={type}
+                          type="button"
+                          onClick={() => setModelFilter(type)}
+                          className={`px-3 py-1.5 rounded-xl whitespace-nowrap transition-all ${
+                            modelFilter === type
+                              ? 'bg-rose-600 text-white shadow-sm'
+                              : 'bg-white text-slate-700 hover:bg-slate-200/70 border border-slate-200/70'
+                          }`}
+                        >
+                          {type} ({count})
+                        </button>
+                      );
+                    })}
+                  </div>
+
+                  {/* Search input & Sort toggle */}
+                  <div className="flex items-center gap-2">
+                    <input
+                      type="text"
+                      placeholder={`Search ${activeBrand} models...`}
+                      value={searchModel}
+                      onChange={(e) => setSearchModel(e.target.value)}
+                      className="px-3.5 py-1.5 text-xs rounded-xl border border-slate-200 bg-white focus:border-rose-600 outline-none w-full md:w-48 font-medium"
+                    />
+
+                    <button
+                      type="button"
+                      onClick={() => setSortBy(sortBy === 'POPULAR' ? 'ALPHA' : 'POPULAR')}
+                      className="text-[11px] font-bold px-2.5 py-1.5 rounded-xl bg-white border border-slate-200 hover:bg-slate-100 text-slate-700 whitespace-nowrap"
+                      title="Toggle between Popular first and Alphabetical A-Z"
+                    >
+                      Sort: {sortBy === 'POPULAR' ? '★ Popular' : 'A-Z'}
+                    </button>
+                  </div>
+                </div>
+
+                {/* Models Grid in Order */}
+                {orderedModels.length === 0 ? (
+                  <div className="text-center py-12 bg-white rounded-2xl border border-slate-200 text-xs text-slate-500">
+                    No models found matching &quot;{searchModel}&quot; in {modelFilter === 'ALL' ? activeBrand : modelFilter}.
+                    <button
+                      onClick={() => { setSearchModel(''); setModelFilter('ALL'); }}
+                      className="block mx-auto mt-2 text-rose-600 font-bold hover:underline"
+                    >
+                      Clear search filter
+                    </button>
+                  </div>
+                ) : (
+                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3.5">
+                    {orderedModels.map((model) => {
+                      const isSelected = activeModel === model.name;
+
+                      return (
+                        <button
+                          key={model.id}
+                          onClick={() => handleModelSelect(model.name)}
+                          className={`p-4 rounded-2xl border text-left transition-all flex flex-col justify-between group cursor-pointer relative ${
+                            isSelected
+                              ? 'bg-rose-50/70 border-rose-500 shadow-md ring-2 ring-rose-500/20'
+                              : 'bg-white border-slate-200/80 hover:border-rose-300 hover:shadow-md'
+                          }`}
+                        >
+                          <div>
+                            <div className="flex items-center justify-between gap-1 mb-2">
+                              <span className="text-[10px] font-black uppercase tracking-wider px-2 py-0.5 rounded-full bg-slate-100 text-slate-600">
+                                {model.bodyType}
+                              </span>
+
+                              {model.popular && (
+                                <span className="text-[9px] font-black uppercase px-2 py-0.5 rounded-full bg-amber-100 text-amber-800">
+                                  ★ POPULAR
+                                </span>
+                              )}
+                            </div>
+
+                            <h4 className="font-extrabold text-slate-900 text-base group-hover:text-rose-600 transition-colors">
+                              {model.name}
+                            </h4>
+                          </div>
+
+                          <div className="mt-3 pt-2.5 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-500">
+                            <span className="truncate max-w-[120px]">
+                              {model.fuels.join(' • ')}
+                            </span>
+                            <span className="font-bold text-rose-600 text-xs group-hover:translate-x-0.5 transition-transform">
+                              Select →
+                            </span>
+                          </div>
+                        </button>
+                      );
+                    })}
+                  </div>
+                )}
               </div>
-            </div>
-          )}
+            );
+          })()}
 
           {/* STEP 3: Fuel Type */}
           {step === 3 && (

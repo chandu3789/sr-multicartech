@@ -274,7 +274,9 @@ function BookingFlowContent() {
                   </div>
 
                   <div>
-                    <label className="block text-xs font-bold text-slate-700 mb-1">Model</label>
+                    <label className="block text-xs font-bold text-slate-700 mb-1">
+                      Model ({availableModels.length} Models)
+                    </label>
                     <select
                       value={model}
                       onChange={(e) => {
@@ -286,9 +288,23 @@ function BookingFlowContent() {
                       }}
                       className="w-full p-3 rounded-xl border border-slate-200 bg-slate-50 text-sm font-semibold outline-none"
                     >
-                      {availableModels.map(m => (
-                        <option key={m.id} value={m.name}>{m.name}</option>
-                      ))}
+                      {['Hatchback', 'Sedan', 'SUV', 'MUV', 'Luxury', 'EV', 'Coupe'].map((type) => {
+                        const modelsOfType = availableModels
+                          .filter((m) => m.bodyType === type)
+                          .sort((a, b) => a.name.localeCompare(b.name));
+
+                        if (modelsOfType.length === 0) return null;
+
+                        return (
+                          <optgroup key={type} label={`── ${type.toUpperCase()} ──`}>
+                            {modelsOfType.map((m) => (
+                              <option key={m.id} value={m.name}>
+                                {m.name} {m.popular ? '★' : ''}
+                              </option>
+                            ))}
+                          </optgroup>
+                        );
+                      })}
                     </select>
                   </div>
 

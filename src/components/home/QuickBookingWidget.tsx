@@ -117,18 +117,30 @@ export default function QuickBookingWidget() {
           <div>
             <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5 flex items-center gap-1.5">
               <Car className="w-3.5 h-3.5 text-rose-600" />
-              2. Select Model
+              2. Select Model ({availableModels.length})
             </label>
             <select
               value={selectedModel}
               onChange={(e) => handleModelChange(e.target.value)}
               className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-slate-50 text-slate-900 text-sm font-semibold focus:bg-white focus:border-rose-600 focus:ring-1 focus:ring-rose-600 outline-none transition-all cursor-pointer"
             >
-              {availableModels.map((m) => (
-                <option key={m.id} value={m.name}>
-                  {m.name} ({m.bodyType})
-                </option>
-              ))}
+              {['Hatchback', 'Sedan', 'SUV', 'MUV', 'Luxury', 'EV', 'Coupe'].map((type) => {
+                const modelsOfType = availableModels
+                  .filter((m) => m.bodyType === type)
+                  .sort((a, b) => a.name.localeCompare(b.name));
+
+                if (modelsOfType.length === 0) return null;
+
+                return (
+                  <optgroup key={type} label={`── ${type.toUpperCase()} ──`}>
+                    {modelsOfType.map((m) => (
+                      <option key={m.id} value={m.name}>
+                        {m.name} {m.popular ? '★' : ''}
+                      </option>
+                    ))}
+                  </optgroup>
+                );
+              })}
             </select>
           </div>
 
