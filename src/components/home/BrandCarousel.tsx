@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { CAR_BRANDS } from '@/lib/data/carData';
 import { useCar } from '@/lib/context/CarContext';
 import { ShieldCheck, ChevronRight } from 'lucide-react';
+import CarBrandLogo from '@/components/brand/CarBrandLogo';
 
 export default function BrandCarousel() {
   const { selectCar } = useCar();
@@ -56,11 +57,11 @@ export default function BrandCarousel() {
               key={brand.id}
               href={`/select-car?brand=${encodeURIComponent(brand.name)}`}
               onClick={() => handleBrandClick(brand)}
-              className="p-4 rounded-2xl bg-white border border-slate-200 hover:border-rose-400 hover:shadow-md transition-all flex flex-col items-center justify-center text-center group cursor-pointer"
+              className="p-3.5 rounded-2xl bg-white border border-slate-200/90 hover:border-rose-400 hover:shadow-lg transition-all flex flex-col items-center justify-center text-center group cursor-pointer"
             >
-              {/* Monogram Badge */}
-              <div className="w-12 h-12 rounded-xl bg-slate-100 group-hover:bg-rose-50 text-slate-700 group-hover:text-rose-600 font-black text-sm flex items-center justify-center mb-2.5 transition-colors border border-slate-200/60 group-hover:border-rose-200">
-                {brand.logoText || brand.name.slice(0, 2).toUpperCase()}
+              {/* Brand Authentic Logo Emblem */}
+              <div className="w-14 h-14 rounded-2xl bg-slate-50 group-hover:bg-white p-2.5 shadow-sm group-hover:shadow-md transition-all duration-300 flex items-center justify-center mb-2.5 border border-slate-200/80 group-hover:border-rose-300 group-hover:scale-110">
+                <CarBrandLogo brandId={brand.id} brandName={brand.name} className="w-full h-full object-contain" />
               </div>
 
               <span className="text-xs font-bold text-slate-800 group-hover:text-rose-600 transition-colors">

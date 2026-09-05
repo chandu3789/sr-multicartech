@@ -7,6 +7,7 @@ import { CAR_BRANDS } from '@/lib/data/carData';
 import { SERVICE_PACKAGES } from '@/lib/data/servicesData';
 import { useCar } from '@/lib/context/CarContext';
 import { useCity } from '@/lib/context/CityContext';
+import CarBrandLogo from '@/components/brand/CarBrandLogo';
 
 export default function QuickBookingWidget() {
   const router = useRouter();
@@ -97,24 +98,70 @@ export default function QuickBookingWidget() {
 
       <form onSubmit={handleProceed} className="space-y-6">
         {/* Step 1, 2, 3: Car Selection Bar */}
+        {/* Quick Brand Logo Picker Bar */}
+        <div className="space-y-1.5">
+          <div className="flex items-center justify-between text-xs">
+            <span className="font-bold text-slate-700 uppercase tracking-wider text-[11px] flex items-center gap-1.5">
+              <Car className="w-3.5 h-3.5 text-rose-600" />
+              Popular Brands:
+            </span>
+            <span className="text-[11px] text-slate-400">Click logo to select instantly</span>
+          </div>
+          <div className="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-none">
+            {CAR_BRANDS.slice(0, 10).map((b) => {
+              const isSelected = selectedBrand === b.name;
+              return (
+                <button
+                  key={b.id}
+                  type="button"
+                  onClick={() => handleBrandChange(b.name)}
+                  className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl border text-xs font-bold transition-all flex-shrink-0 cursor-pointer ${
+                    isSelected
+                      ? 'bg-rose-50 border-rose-500 text-rose-700 shadow-sm'
+                      : 'bg-white border-slate-200 text-slate-700 hover:border-slate-300 hover:bg-slate-50'
+                  }`}
+                >
+                  <div className="w-4 h-4 flex items-center justify-center flex-shrink-0">
+                    <CarBrandLogo brandId={b.id} brandName={b.name} className="w-full h-full object-contain" />
+                  </div>
+                  <span className="text-[11px] whitespace-nowrap">{b.name}</span>
+                </button>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Step 1, 2, 3: Car Selection Bar */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {/* Brand Selector */}
           <div>
-            <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5 flex items-center gap-1.5">
-              <Car className="w-3.5 h-3.5 text-rose-600" />
-              1. Car Manufacturer
+            <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5 flex items-center justify-between">
+              <span className="flex items-center gap-1.5">
+                <Car className="w-3.5 h-3.5 text-rose-600" />
+                1. Car Manufacturer
+              </span>
+              {activeBrandObj && (
+                <span className="text-[10px] text-rose-600 font-bold uppercase tracking-wider">
+                  {activeBrandObj.models.length} Models
+                </span>
+              )}
             </label>
-            <select
-              value={selectedBrand}
-              onChange={(e) => handleBrandChange(e.target.value)}
-              className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-slate-50 text-slate-900 text-sm font-semibold focus:bg-white focus:border-rose-600 focus:ring-1 focus:ring-rose-600 outline-none transition-all cursor-pointer"
-            >
-              {CAR_BRANDS.map((b) => (
-                <option key={b.id} value={b.name}>
-                  {b.name} ({b.models.length} Models)
-                </option>
-              ))}
-            </select>
+            <div className="relative flex items-center">
+              <div className="absolute left-3 w-5 h-5 pointer-events-none flex items-center justify-center">
+                <CarBrandLogo brandId={activeBrandObj?.id} brandName={selectedBrand} className="w-full h-full object-contain" />
+              </div>
+              <select
+                value={selectedBrand}
+                onChange={(e) => handleBrandChange(e.target.value)}
+                className="w-full pl-10 pr-3.5 py-2.5 rounded-xl border border-slate-200 bg-slate-50 text-slate-900 text-sm font-semibold focus:bg-white focus:border-rose-600 focus:ring-1 focus:ring-rose-600 outline-none transition-all cursor-pointer"
+              >
+                {CAR_BRANDS.map((b) => (
+                  <option key={b.id} value={b.name}>
+                    {b.name} ({b.models.length} Models)
+                  </option>
+                ))}
+              </select>
+            </div>
           </div>
 
           {/* Model Selector grouped by segment in order */}

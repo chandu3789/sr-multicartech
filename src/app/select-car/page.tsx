@@ -6,6 +6,7 @@ import { Car, Check, ArrowRight, Plus, Trash2, ShieldCheck, Sparkles, CheckCircl
 import { CAR_BRANDS } from '@/lib/data/carData';
 import { SERVICE_PACKAGES } from '@/lib/data/servicesData';
 import { useCar, SelectedCar } from '@/lib/context/CarContext';
+import CarBrandLogo from '@/components/brand/CarBrandLogo';
 
 function CarSelectorContent() {
   const router = useRouter();
@@ -102,8 +103,8 @@ function CarSelectorContent() {
         {currentCar && (
           <div className="mb-10 p-6 rounded-3xl bg-white border border-slate-200/80 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-6">
             <div className="flex items-center gap-4">
-              <div className="w-14 h-14 rounded-2xl bg-rose-600 text-white flex items-center justify-center flex-shrink-0 shadow-md shadow-rose-600/20">
-                <Car className="w-7 h-7" />
+              <div className="w-16 h-16 rounded-2xl bg-slate-50 border border-slate-200 p-2.5 flex items-center justify-center flex-shrink-0 shadow-sm">
+                <CarBrandLogo brandName={currentCar.brand} className="w-full h-full object-contain" />
               </div>
               <div>
                 <span className="text-[11px] font-bold text-rose-600 uppercase tracking-wider">
@@ -208,12 +209,12 @@ function CarSelectorContent() {
                     onClick={() => handleBrandSelect(brand.name)}
                     className={`p-4 rounded-2xl border text-center transition-all flex flex-col items-center justify-center group cursor-pointer ${
                       activeBrand === brand.name
-                        ? 'bg-rose-50/60 border-rose-500 shadow-md'
-                        : 'bg-white border-slate-200/80 hover:border-rose-300 hover:shadow-sm'
+                        ? 'bg-rose-50/70 border-rose-500 shadow-md'
+                        : 'bg-white border-slate-200/90 hover:border-rose-400 hover:shadow-md'
                     }`}
                   >
-                    <div className="w-12 h-12 rounded-xl bg-slate-100 group-hover:bg-rose-100 text-slate-800 group-hover:text-rose-600 font-black text-sm flex items-center justify-center mb-2 transition-colors">
-                      {brand.logoText || brand.name.slice(0, 2).toUpperCase()}
+                    <div className="w-16 h-16 rounded-2xl bg-slate-50 group-hover:bg-white p-3 shadow-sm group-hover:shadow-md transition-all duration-300 flex items-center justify-center mb-2.5 border border-slate-200/80 group-hover:border-rose-300 group-hover:scale-105">
+                      <CarBrandLogo brandId={brand.id} brandName={brand.name} className="w-full h-full object-contain" />
                     </div>
                     <span className="font-bold text-xs text-slate-900 group-hover:text-rose-600 transition-colors">
                       {brand.name}
@@ -250,7 +251,10 @@ function CarSelectorContent() {
               <div className="space-y-6 animate-in fade-in duration-200">
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 pb-4">
                   <div>
-                    <h3 className="font-black text-slate-900 text-xl flex items-center gap-2">
+                    <h3 className="font-black text-slate-900 text-xl flex items-center gap-2.5">
+                      <div className="w-8 h-8 rounded-lg bg-white p-1 shadow-sm border border-slate-200 flex items-center justify-center flex-shrink-0">
+                        <CarBrandLogo brandId={brandObj.id} brandName={brandObj.name} className="w-full h-full object-contain" />
+                      </div>
                       <span>Select Model for</span>
                       <span className="text-rose-600">{activeBrand}</span>
                       <span className="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-600">

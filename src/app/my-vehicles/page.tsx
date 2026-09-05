@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { Car, Plus, Trash2, CheckCircle2, ArrowRight, ShieldCheck, Calendar } from 'lucide-react';
 import { useCar } from '@/lib/context/CarContext';
 import { CAR_BRANDS } from '@/lib/data/carData';
+import CarBrandLogo from '@/components/brand/CarBrandLogo';
 
 export default function MyVehiclesPage() {
   const { currentCar, savedGarage, selectCar, addToGarage, removeFromGarage } = useCar();
@@ -148,9 +149,9 @@ export default function MyVehiclesPage() {
               >
                 <div>
                   <div className="flex items-center justify-between gap-2 mb-4">
-                    <span className="w-10 h-10 rounded-xl bg-slate-100 flex items-center justify-center font-bold text-rose-600">
-                      <Car className="w-5 h-5" />
-                    </span>
+                    <div className="w-12 h-12 rounded-xl bg-slate-50 border border-slate-200 p-2 flex items-center justify-center shadow-xs">
+                      <CarBrandLogo brandName={car.brand} className="w-full h-full object-contain" />
+                    </div>
                     {isActive ? (
                       <span className="flex items-center gap-1 text-[10px] font-black uppercase tracking-wider text-rose-600 bg-rose-50 px-2.5 py-1 rounded-full border border-rose-200">
                         <CheckCircle2 className="w-3.5 h-3.5" />

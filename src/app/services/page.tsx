@@ -16,6 +16,7 @@ import {
 } from 'lucide-react';
 import { SERVICE_CATEGORIES, SERVICE_PACKAGES } from '@/lib/data/servicesData';
 import { useCar } from '@/lib/context/CarContext';
+import BrandCarousel from '@/components/home/BrandCarousel';
 
 export default function ServicesPage() {
   const { currentCar } = useCar();
@@ -181,6 +182,11 @@ export default function ServicesPage() {
             </div>
           ))}
         </div>
+      </div>
+
+      {/* Car Brands Selector with Authentic Emblems */}
+      <div className="mt-12 border-t border-slate-200/80">
+        <BrandCarousel />
       </div>
     </div>
   );

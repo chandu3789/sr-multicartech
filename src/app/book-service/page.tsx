@@ -25,6 +25,7 @@ import { SERVICE_PACKAGES } from '@/lib/data/servicesData';
 import { useCar } from '@/lib/context/CarContext';
 import { useBooking } from '@/lib/context/BookingContext';
 import { useCity } from '@/lib/context/CityContext';
+import CarBrandLogo from '@/components/brand/CarBrandLogo';
 
 function BookingFlowContent() {
   const router = useRouter();
@@ -255,22 +256,27 @@ function BookingFlowContent() {
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                   <div>
                     <label className="block text-xs font-bold text-slate-700 mb-1">Brand</label>
-                    <select
-                      value={brand}
-                      onChange={(e) => {
-                        setBrand(e.target.value);
-                        const b = CAR_BRANDS.find(item => item.name === e.target.value);
-                        if (b && b.models.length > 0) {
-                          setModel(b.models[0].name);
-                          setFuel(b.models[0].fuels[0]);
-                        }
-                      }}
-                      className="w-full p-3 rounded-xl border border-slate-200 bg-slate-50 text-sm font-semibold outline-none"
-                    >
-                      {CAR_BRANDS.map(b => (
-                        <option key={b.id} value={b.name}>{b.name}</option>
-                      ))}
-                    </select>
+                    <div className="relative flex items-center">
+                      <div className="absolute left-3 w-5 h-5 pointer-events-none flex items-center justify-center">
+                        <CarBrandLogo brandName={brand} className="w-full h-full object-contain" />
+                      </div>
+                      <select
+                        value={brand}
+                        onChange={(e) => {
+                          setBrand(e.target.value);
+                          const b = CAR_BRANDS.find(item => item.name === e.target.value);
+                          if (b && b.models.length > 0) {
+                            setModel(b.models[0].name);
+                            setFuel(b.models[0].fuels[0]);
+                          }
+                        }}
+                        className="w-full pl-10 pr-3 py-3 rounded-xl border border-slate-200 bg-slate-50 text-sm font-semibold outline-none"
+                      >
+                        {CAR_BRANDS.map(b => (
+                          <option key={b.id} value={b.name}>{b.name}</option>
+                        ))}
+                      </select>
+                    </div>
                   </div>
 
                   <div>
@@ -663,9 +669,14 @@ function BookingFlowContent() {
 
                 {/* Summary Badges Grid */}
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 p-4 rounded-2xl bg-slate-50 border border-slate-200 text-xs">
-                  <div>
-                    <span className="text-slate-400 block text-[10px] uppercase font-bold">Vehicle</span>
-                    <span className="font-bold text-slate-900">{brand} {model} ({fuel})</span>
+                  <div className="flex items-center gap-2.5">
+                    <div className="w-7 h-7 rounded-lg bg-white p-1 border border-slate-200 flex items-center justify-center flex-shrink-0 shadow-xs">
+                      <CarBrandLogo brandName={brand} className="w-full h-full object-contain" />
+                    </div>
+                    <div>
+                      <span className="text-slate-400 block text-[10px] uppercase font-bold">Vehicle</span>
+                      <span className="font-bold text-slate-900">{brand} {model} ({fuel})</span>
+                    </div>
                   </div>
                   <div>
                     <span className="text-slate-400 block text-[10px] uppercase font-bold">Service Mode</span>
