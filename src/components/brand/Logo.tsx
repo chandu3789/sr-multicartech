@@ -37,15 +37,15 @@ export default function Logo({
     <Link
       href="/"
       className={`inline-flex items-center gap-2.5 sm:gap-3.5 group select-none whitespace-nowrap py-1 ${className}`}
-      title="SR Multi Car Tech — Your Drive Our Priority"
+      title="SR Multicartech — Premium Automotive Care"
     >
-      {/* Official Master Emblem (User's Exact Custom Badge) */}
+      {/* Official Master Emblem */}
       <div
-        className={`relative ${currentBadge.className} flex-shrink-0 transition-transform duration-300 group-hover:scale-105 filter drop-shadow-[0_4px_14px_rgba(225,29,72,0.25)]`}
+        className={`relative ${currentBadge.className} flex-shrink-0 transition-transform duration-300 group-hover:scale-105 filter drop-shadow-[0_4px_14px_rgba(220,38,38,0.25)]`}
       >
         <Image
           src="/images/sr-logo.png"
-          alt="SR Multi Car Tech Official Logo"
+          alt="SR Multicartech Official Logo"
           width={currentBadge.dimension}
           height={currentBadge.dimension}
           priority
@@ -58,7 +58,7 @@ export default function Logo({
         {/* Main Brand Name Line */}
         <div className="flex items-center leading-tight">
           <span
-            className={`${titleSizes[size].sr} font-black tracking-tight text-rose-600 font-sans`}
+            className={`${titleSizes[size].sr} font-black tracking-tight text-red-600 font-sans`}
           >
             SR
           </span>
@@ -67,14 +67,14 @@ export default function Logo({
               isDark ? 'text-white' : 'text-slate-950'
             }`}
           >
-            MULTI CAR TECH
+            MULTICARTECH
           </span>
         </div>
 
-        {/* Secondary Sub-Tagline from Official Logo */}
+        {/* Secondary Sub-Tagline */}
         {showTagline && (
           <div className="flex items-center gap-1 sm:gap-1.5 mt-1 leading-none">
-            <span className="text-[8.5px] sm:text-[9.5px] font-black tracking-[0.14em] uppercase text-rose-600">
+            <span className="text-[8.5px] sm:text-[9.5px] font-black tracking-[0.14em] uppercase text-red-600">
               SERVICE
             </span>
             <span className="text-slate-300 text-[9px]">•</span>
@@ -86,7 +86,7 @@ export default function Logo({
               REPAIR
             </span>
             <span className="text-slate-300 text-[9px]">•</span>
-            <span className="text-[8.5px] sm:text-[9.5px] font-black tracking-[0.14em] uppercase text-rose-600">
+            <span className="text-[8.5px] sm:text-[9.5px] font-black tracking-[0.14em] uppercase text-red-600">
               DIAGNOSIS
             </span>
             <span className="text-slate-300 text-[9px]">•</span>

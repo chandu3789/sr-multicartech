@@ -1,58 +1,51 @@
+import React from 'react';
 import HeroSection from '@/components/home/HeroSection';
-import PopularServices from '@/components/home/PopularServices';
-import ServiceCategoriesGrid from '@/components/home/ServiceCategoriesGrid';
-import SpecialOffers from '@/components/home/SpecialOffers';
+import QuickTrustBar from '@/components/home/QuickTrustBar';
 import OwnerSection from '@/components/home/OwnerSection';
+import ServicesSection from '@/components/home/ServicesSection';
+import TechnologySection from '@/components/home/TechnologySection';
+import PortfolioSection from '@/components/home/PortfolioSection';
+import CustomerReviews from '@/components/home/CustomerReviews';
 import WhyChooseUs from '@/components/home/WhyChooseUs';
 import HowItWorks from '@/components/home/HowItWorks';
-import BrandCarousel from '@/components/home/BrandCarousel';
-import WorkshopLocator from '@/components/home/WorkshopLocator';
-import CustomerReviews from '@/components/home/CustomerReviews';
-import StatsSection from '@/components/home/StatsSection';
+import ContactSection from '@/components/home/ContactSection';
 import FaqSection from '@/components/home/FaqSection';
-import CtaBanner from '@/components/home/CtaBanner';
 
 export default function HomePage() {
   return (
     <>
-      {/* 2. Hero & 3. Quick Booking Widget */}
+      {/* 1. Hero Section */}
       <HeroSection />
 
-      {/* 4. Popular Services */}
-      <PopularServices />
+      {/* 2. Quick Trust Bar */}
+      <QuickTrustBar />
 
-      {/* 5. Service Categories Grid */}
-      <ServiceCategoriesGrid />
-
-      {/* 6. Special Offers (Coming Soon) */}
-      <SpecialOffers />
-
-      {/* 7. Founder & German Diagnostic Technology */}
+      {/* 3. Owner / Founder Profile (BRR — Birlangi Ratnala Ramesh) */}
       <OwnerSection />
 
-      {/* 8. Why Choose SR Multi Car Tech */}
-      <WhyChooseUs />
+      {/* 4. Complete Services Section (12 Services Categorized) */}
+      <ServicesSection />
 
-      {/* 8. How It Works (4 Steps) */}
-      <HowItWorks />
+      {/* 5. Advanced Technology & Diagnostics Section */}
+      <TechnologySection />
 
-      {/* 9. Car Brands We Service */}
-      <BrandCarousel />
+      {/* 6. Our Work / Portfolio (Interactive Gallery & Lightbox) */}
+      <PortfolioSection />
 
-      {/* 10. Workshop Locator */}
-      <WorkshopLocator />
-
-      {/* 11. Customer Reviews */}
+      {/* 7. Customer Reviews & Experiences */}
       <CustomerReviews />
 
-      {/* 12. Stats Section */}
-      <StatsSection />
+      {/* 9. Why Choose SR Multicartech */}
+      <WhyChooseUs />
 
-      {/* 13. FAQ Section */}
+      {/* 10. Service Process (4-Step Timeline) */}
+      <HowItWorks />
+
+      {/* 11. Contact & Service Enquiry Form */}
+      <ContactSection />
+
+      {/* 12. Frequently Asked Questions */}
       <FaqSection />
-
-      {/* 14. CTA Banner */}
-      <CtaBanner />
     </>
   );
 }

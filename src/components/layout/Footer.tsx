@@ -1,264 +1,205 @@
+'use client';
+
 import React from 'react';
 import Link from 'next/link';
-import { Phone, Mail, MapPin, Clock, MessageCircle, ShieldCheck, Award, HeartHandshake } from 'lucide-react';
+import {
+  MapPin,
+  Phone,
+  AlertTriangle,
+  Clock,
+  ShieldCheck,
+  ChevronRight,
+  Navigation,
+  Heart
+} from 'lucide-react';
 import Logo from '../brand/Logo';
+import { useSos } from '@/lib/context/SosContext';
+import WhatsAppIcon from '@/components/common/WhatsAppIcon';
 
 export default function Footer() {
+  const { openSos } = useSos();
+
+  const quickLinks = [
+    { name: 'Home', href: '/' },
+    { name: 'About / Owner', href: '/#owner' },
+    { name: 'Services', href: '/#services' },
+    { name: 'Our Work', href: '/#work' },
+    { name: 'Technology', href: '/#technology' },
+    { name: 'Reviews', href: '/#reviews' },
+    { name: 'Contact Us', href: '/#contact' }
+  ];
+
+  const serviceLinks = [
+    { name: 'Denting & Painting', href: '/#services' },
+    { name: 'Full Engine Works', href: '/#services' },
+    { name: 'Full Body Repair', href: '/#services' },
+    { name: 'Genuine Spare Parts', href: '/#services' },
+    { name: 'Deep Cleaning & Spa', href: '/#services' },
+    { name: 'Anti-Rust Treatment', href: '/#services' },
+    { name: 'German Diagnostics', href: '/#technology' }
+  ];
+
   return (
-    <footer className="bg-slate-950 text-slate-300 border-t border-slate-900 pt-16 pb-12">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Top Trust Pillars Banner */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pb-12 border-b border-slate-800">
-          <div className="flex items-center gap-4 p-4 rounded-2xl bg-slate-900/60 border border-slate-800/80">
-            <div className="w-12 h-12 rounded-xl bg-rose-500/10 text-rose-500 flex items-center justify-center flex-shrink-0">
-              <ShieldCheck className="w-6 h-6" />
-            </div>
-            <div>
-              <div className="font-bold text-white text-sm">100% Genuine OEM Spares</div>
-              <div className="text-xs text-slate-400">Castrol, Shell, Bosch & factory-certified parts with manufacturer warranty.</div>
-            </div>
+    <footer className="bg-[#070b14] text-white border-t border-slate-800 relative z-30">
+      {/* Top CTA Emergency Band */}
+      <div className="bg-gradient-to-r from-red-700 via-rose-700 to-red-800 py-6 px-4">
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4 text-center md:text-left">
+          <div className="space-y-1">
+            <h3 className="text-xl sm:text-2xl font-black text-white tracking-tight">
+              Facing an Automotive Breakdown or Warning Light?
+            </h3>
+            <p className="text-xs sm:text-sm text-red-100 font-medium">
+              Call SR Multicartech now or tap our 24/7 emergency assistance helpline.
+            </p>
           </div>
 
-          <div className="flex items-center gap-4 p-4 rounded-2xl bg-slate-900/60 border border-slate-800/80">
-            <div className="w-12 h-12 rounded-xl bg-amber-500/10 text-amber-500 flex items-center justify-center flex-shrink-0">
-              <Award className="w-6 h-6" />
-            </div>
-            <div>
-              <div className="font-bold text-white text-sm">Up to 2 Years Warranty</div>
-              <div className="text-xs text-slate-400">Unconditional service warranty on periodic maintenance and DuPont body paints.</div>
-            </div>
-          </div>
+          <div className="flex flex-wrap items-center justify-center gap-3">
+            <a
+              href="tel:9550425789"
+              className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-white text-slate-950 font-black text-xs uppercase tracking-wider shadow-lg hover:bg-slate-100 active:scale-95 transition-all"
+            >
+              <Phone className="w-4 h-4 text-red-600" />
+              <span>CALL: 9550425789</span>
+            </a>
 
-          <div className="flex items-center gap-4 p-4 rounded-2xl bg-slate-900/60 border border-slate-800/80">
-            <div className="w-12 h-12 rounded-xl bg-emerald-500/10 text-emerald-500 flex items-center justify-center flex-shrink-0">
-              <HeartHandshake className="w-6 h-6" />
-            </div>
-            <div>
-              <div className="font-bold text-white text-sm">Free Doorstep Pickup & Drop</div>
-              <div className="text-xs text-slate-400">Live digital tracking from vehicle collection to final garage delivery.</div>
-            </div>
+            <button
+              onClick={openSos}
+              className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-[#0b0f19] hover:bg-slate-900 text-red-400 font-black text-xs uppercase tracking-wider border border-red-400/40 shadow-lg active:scale-95 transition-all cursor-pointer"
+            >
+              <AlertTriangle className="w-4 h-4 text-red-500 animate-pulse" />
+              <span>SOS 24 HRS</span>
+            </button>
           </div>
         </div>
+      </div>
 
-        {/* Main Footer Columns */}
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-8 py-12 border-b border-slate-800">
-          {/* Brand Bio & Contact */}
-          <div className="col-span-2 space-y-4">
-            <Logo variant="dark" showTagline={true} />
-            <div className="text-xs font-serif italic text-rose-400 font-semibold tracking-wide">
-              “Your Drive Our Priority”
-            </div>
-            <p className="text-xs text-slate-400 leading-relaxed max-w-sm">
-              SR Multi Car Tech is your technology-first automotive service partner in Satrampadu, Eluru. Experience transparent pricing, verified master technicians, and stress-free car care at your doorstep or our certified workshop hub.
+      {/* Main Footer Body */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-20">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-8">
+          
+          {/* Brand Info & Mission (4 Cols) */}
+          <div className="lg:col-span-4 space-y-5">
+            <Logo size="md" variant="dark" />
+
+            <p className="text-xs sm:text-sm text-slate-400 leading-relaxed max-w-sm">
+              Premium automotive care, experienced hands, and advanced German diagnostic technology software under the visionary leadership of Founder &amp; Owner <strong className="text-white">BRR (Birlangi Ratnala Ramesh)</strong>.
             </p>
 
-            <div className="space-y-2 pt-2 text-xs text-slate-300">
-              <div className="flex items-center gap-2.5">
-                <Phone className="w-4 h-4 text-rose-500 flex-shrink-0" />
-                <a href="tel:+919550425789" className="hover:text-white transition-colors">
-                  +91 95504 25789 (Customer Care)
-                </a>
+            <div className="pt-2 space-y-2 text-xs text-slate-400">
+              <div className="flex items-center gap-2">
+                <ShieldCheck className="w-4 h-4 text-red-500" />
+                <span>15+ Years Automobile Experience</span>
               </div>
-              <div className="flex items-center gap-2.5">
-                <MessageCircle className="w-4 h-4 text-emerald-500 flex-shrink-0" />
-                <a
-                  href="https://wa.me/919550425789"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:text-white transition-colors"
-                >
-                  +91 95504 25789 (WhatsApp Support)
-                </a>
-              </div>
-              <div className="flex items-center gap-2.5">
-                <Mail className="w-4 h-4 text-rose-500 flex-shrink-0" />
-                <a href="mailto:care@srmulticartech.com" className="hover:text-white transition-colors">
-                  care@srmulticartech.com
-                </a>
-              </div>
-              <div className="flex items-start gap-2.5 pt-1">
-                <MapPin className="w-4 h-4 text-rose-500 flex-shrink-0 mt-0.5" />
-                <span className="text-slate-400 leading-relaxed">
-                  Near Main Road, Satrampadu, Eluru, Andhra Pradesh - 534007
-                  <a
-                    href="https://www.google.com/maps/search/?api=1&query=SR+Multi+Car+Tech+Satrampadu+Eluru+Andhra+Pradesh"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="block text-rose-400 hover:text-rose-300 font-bold mt-1 text-[11px]"
-                  >
-                    📍 Get Directions on Google Maps &rarr;
-                  </a>
-                </span>
-              </div>
-              <div className="flex items-center gap-2.5 pt-1">
-                <Clock className="w-4 h-4 text-amber-500 flex-shrink-0" />
-                <span className="text-slate-400">Open 7 Days: 08:00 AM – 08:30 PM (24/7 SOS Rescue)</span>
+              <div className="flex items-center gap-2">
+                <ShieldCheck className="w-4 h-4 text-emerald-400" />
+                <span>100% Genuine Spare Parts Guarantee</span>
               </div>
             </div>
           </div>
 
-          {/* Column 2: Popular Services */}
-          <div className="space-y-3">
-            <div className="text-xs font-bold uppercase tracking-wider text-white">Car Services</div>
-            <ul className="space-y-2 text-xs text-slate-400">
-              <li>
-                <Link href="/services#periodic-services" className="hover:text-white transition-colors">
-                  Periodic Car Service
-                </Link>
-              </li>
-              <li>
-                <Link href="/services#car-spa-cleaning" className="text-rose-400 hover:text-rose-300 font-semibold transition-colors">
-                  ✨ Car Wash Premium
-                </Link>
-              </li>
-              <li>
-                <Link href="/services#ac-service-repair" className="hover:text-white transition-colors">
-                  AC Service & Gas Refill
-                </Link>
-              </li>
-              <li>
-                <Link href="/services#batteries" className="hover:text-white transition-colors">
-                  Battery Replacement & Jumpstart
-                </Link>
-              </li>
-              <li>
-                <Link href="/services#tyres-wheel-care" className="hover:text-white transition-colors">
-                  Tyres & 3D Wheel Alignment
-                </Link>
-              </li>
-              <li>
-                <Link href="/services#denting-painting" className="hover:text-white transition-colors">
-                  Denting & DuPont Painting
-                </Link>
-              </li>
-              <li>
-                <Link href="/services#car-spa-cleaning" className="hover:text-white transition-colors">
-                  Car Spa & Ceramic Detailing
-                </Link>
-              </li>
-              <li>
-                <Link href="/services#car-inspection" className="hover:text-white transition-colors">
-                  Pre-Purchase Inspection
-                </Link>
-              </li>
-              <li>
-                <Link href="/services#suspension-brakes" className="hover:text-white transition-colors">
-                  Suspension & Brake Pads
-                </Link>
-              </li>
-              <li>
-                <Link href="/sos" className="hover:text-red-400 font-semibold transition-colors">
-                  24/7 Roadside SOS Towing
-                </Link>
-              </li>
+          {/* Quick Links (2 Cols) */}
+          <div className="lg:col-span-2 space-y-4">
+            <h4 className="text-xs font-black uppercase tracking-widest text-red-500">
+              Quick Links
+            </h4>
+            <ul className="space-y-2.5 text-xs text-slate-300">
+              {quickLinks.map((link) => (
+                <li key={link.name}>
+                  <Link
+                    href={link.href}
+                    className="hover:text-red-400 transition-colors inline-flex items-center gap-1.5"
+                  >
+                    <ChevronRight className="w-3 h-3 text-slate-600" />
+                    <span>{link.name}</span>
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 
-          {/* Column 3: Customer Portal */}
-          <div className="space-y-3">
-            <div className="text-xs font-bold uppercase tracking-wider text-white">Customer Portal</div>
-            <ul className="space-y-2 text-xs text-slate-400">
-              <li>
-                <Link href="/my-bookings" className="hover:text-white transition-colors">
-                  My Bookings
-                </Link>
-              </li>
-              <li>
-                <Link href="/track-service" className="hover:text-white transition-colors">
-                  Track Service Live
-                </Link>
-              </li>
-              <li>
-                <Link href="/my-vehicles" className="hover:text-white transition-colors">
-                  My Garage & Vehicles
-                </Link>
-              </li>
-              <li>
-                <Link href="/offers" className="hover:text-white transition-colors">
-                  Coupons & Offers
-                </Link>
-              </li>
-              <li>
-                <Link href="/insurance" className="hover:text-white transition-colors">
-                  Cashless Insurance Claims
-                </Link>
-              </li>
-              <li>
-                <Link href="/faq" className="hover:text-white transition-colors">
-                  Frequently Asked Questions
-                </Link>
-              </li>
-              <li>
-                <Link href="/admin" className="text-rose-400 font-semibold hover:text-rose-300 transition-colors">
-                  Admin Dashboard Demo
-                </Link>
-              </li>
+          {/* Core Services (3 Cols) */}
+          <div className="lg:col-span-3 space-y-4">
+            <h4 className="text-xs font-black uppercase tracking-widest text-red-500">
+              Our Services
+            </h4>
+            <ul className="space-y-2.5 text-xs text-slate-300">
+              {serviceLinks.map((link) => (
+                <li key={link.name}>
+                  <Link
+                    href={link.href}
+                    className="hover:text-red-400 transition-colors inline-flex items-center gap-1.5"
+                  >
+                    <ChevronRight className="w-3 h-3 text-slate-600" />
+                    <span>{link.name}</span>
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 
-          {/* Column 4: Company & Legal */}
-          <div className="space-y-3">
-            <div className="text-xs font-bold uppercase tracking-wider text-white">Company & Legal</div>
-            <ul className="space-y-2 text-xs text-slate-400">
-              <li>
-                <Link href="/about" className="hover:text-white transition-colors">
-                  About SR Multi Car Tech
-                </Link>
-              </li>
-              <li>
-                <Link href="/contact" className="hover:text-white transition-colors">
-                  Workshop Locations & Contact
-                </Link>
-              </li>
-              <li>
-                <Link href="/blog" className="hover:text-white transition-colors">
-                  Car Care Blog & Guides
-                </Link>
-              </li>
-              <li>
-                <Link href="/privacy" className="hover:text-white transition-colors">
-                  Privacy Policy
-                </Link>
-              </li>
-              <li>
-                <Link href="/terms" className="hover:text-white transition-colors">
-                  Terms & Conditions
-                </Link>
-              </li>
-            </ul>
+          {/* Location & Contact (3 Cols) */}
+          <div className="lg:col-span-3 space-y-4">
+            <h4 className="text-xs font-black uppercase tracking-widest text-red-500">
+              Garage Location
+            </h4>
+
+            <div className="space-y-3 text-xs text-slate-300">
+              <div className="flex items-start gap-2.5">
+                <MapPin className="w-4 h-4 text-red-500 flex-shrink-0 mt-0.5" />
+                <div>
+                  <p className="font-semibold text-white">SR Multicartech</p>
+                  <p className="text-slate-400 mt-0.5 leading-snug">
+                    Satrampadu, Opp. Aditya Degree College, Near Ambika Devi Temple, Eluru.
+                  </p>
+                  <a
+                    href="https://www.google.com/maps/search/?api=1&query=SR+Multicartech+Satrampadu+Eluru"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1 text-[11px] font-bold text-red-400 hover:text-red-300 mt-1"
+                  >
+                    <Navigation className="w-3 h-3" />
+                    <span>Directions on Google Maps</span>
+                  </a>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-2.5 pt-2 border-t border-slate-800">
+                <Phone className="w-4 h-4 text-red-500 flex-shrink-0" />
+                <div>
+                  <span className="text-[10px] text-slate-500 uppercase block font-bold">Direct Phone:</span>
+                  <a href="tel:9550425789" className="text-white hover:text-red-400 font-bold font-mono">
+                    +91 9550425789
+                  </a>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-2.5 pt-1">
+                <WhatsAppIcon size={18} />
+                <div>
+                  <span className="text-[10px] text-slate-500 uppercase block font-bold">WhatsApp:</span>
+                  <a
+                    href="https://wa.me/919550425789"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-white hover:text-emerald-400 font-bold font-mono"
+                  >
+                    +91 9550425789
+                  </a>
+                </div>
+              </div>
+            </div>
           </div>
+
         </div>
 
-        {/* Bottom Bar: Copyright and Social Icons */}
-        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
-          <div>
-            © {new Date().getFullYear()} SR Multi Car Tech. All rights reserved. “Complete Car Care. One Trusted Place.”
-          </div>
-
-          <div className="flex items-center space-x-4">
-            <a
-              href="https://wa.me/919550425789"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="p-2 rounded-lg bg-slate-900 hover:bg-emerald-600 hover:text-white transition-all text-slate-400"
-              title="WhatsApp"
-            >
-              <MessageCircle className="w-4 h-4" />
-            </a>
-            <a
-              href="tel:+919550425789"
-              className="p-2 rounded-lg bg-slate-900 hover:bg-rose-600 hover:text-white transition-all text-slate-400"
-              title="Call Helpline"
-            >
-              <Phone className="w-4 h-4" />
-            </a>
-            <Link
-              href="/sos"
-              className="px-3 py-1.5 rounded-lg bg-red-950/80 text-red-400 hover:bg-red-900 border border-red-800 text-[11px] font-bold"
-            >
-              SOS Rescue Desk
-            </Link>
-          </div>
+        {/* Bottom Copyright Bar */}
+        <div className="pt-12 mt-12 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-400">
+          <p>© {new Date().getFullYear()} SR Multicartech. All rights reserved.</p>
+          <p className="flex items-center gap-1 text-[11px]">
+            <span>Founder &amp; Owner: BRR (Birlangi Ratnala Ramesh)</span>
+            <span className="text-slate-600">•</span>
+            <span>Satrampadu, Eluru</span>
+          </p>
         </div>
       </div>
     </footer>

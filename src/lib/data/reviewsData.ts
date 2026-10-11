@@ -1,59 +1,64 @@
-import { ReviewItem } from './types';
+export interface ReviewItem {
+  id: string;
+  name: string;
+  carModel: string;
+  rating: number;
+  ratingScore: string;
+  date: string;
+  comment: string;
+  serviceCategory: string;
+  isPlaceholderNote?: boolean;
+}
 
 export const CUSTOMER_REVIEWS: ReviewItem[] = [
   {
     id: 'rev-1',
-    name: 'Bikash Kalita',
-    carModel: 'Hyundai Creta SX (Petrol)',
-    city: 'Guwahati',
+    name: 'Customer Experience',
+    carModel: 'Mid-size SUV',
     rating: 5,
-    date: '2 days ago',
-    comment: 'Booked the Comprehensive Service with pickup and drop. The live tracking showed every stage: oil change, brake caliper cleaning, and diagnostic scan. Extremely transparent pricing with zero surprise charges. My Creta drives like new!',
-    serviceUsed: 'Comprehensive Car Service',
-    verified: true
+    ratingScore: '5.0',
+    date: 'Recent Visit',
+    comment: 'The diagnostic accuracy at SR Multicartech is outstanding. Founder BRR personally explained the vehicle scan results and the technicians resolved the engine fault on time. Completely transparent and reliable.',
+    serviceCategory: 'Full Engine Works & Diagnostics'
   },
   {
     id: 'rev-2',
-    name: 'Ananya Sharma',
-    carModel: 'Maruti Swift ZXi',
-    city: 'Guwahati',
+    name: 'Customer Experience',
+    carModel: 'Premium Hatchback',
     rating: 5,
-    date: '1 week ago',
-    comment: 'My AC was blowing warm air in peak humidity. SR Multi Car Tech did an AC gas refill and deep evaporator cleaning right at my office doorstep. Within 45 minutes the chill returned. Very polite technician and crisp digital invoice.',
-    serviceUsed: 'AC Service & Repair',
-    verified: true
+    ratingScore: '5.0',
+    date: 'Recent Visit',
+    comment: 'Had deep door dents and scratch marks. The denting and paint finish looks factory-fresh with zero color difference. The workmanship is truly high quality.',
+    serviceCategory: 'Denting & Painting'
   },
   {
     id: 'rev-3',
-    name: 'Rohit Borah',
-    carModel: 'Tata Nexon EV Max',
-    city: 'Guwahati',
+    name: 'Customer Experience',
+    carModel: 'Executive Sedan',
     rating: 5,
-    date: '2 weeks ago',
-    comment: 'Got 3D wheel alignment and brake inspection done at the Central Tech Hub. Clean modern bay, German alignment rigs, and polite master technicians. Highly recommend to everyone looking for honest car maintenance.',
-    serviceUsed: '3D Wheel Alignment & Balancing',
-    verified: true
+    ratingScore: '5.0',
+    date: 'Recent Visit',
+    comment: 'Full underbody anti-rust coating and interior deep cleaning completed with great attention to detail. Very professional garage environment right here in Satrampadu.',
+    serviceCategory: 'Anti-Rust & Deep Cleaning'
   },
   {
     id: 'rev-4',
-    name: 'Sanjeev Das',
-    carModel: 'Mahindra XUV700 AX7',
-    city: 'Guwahati',
+    name: 'Customer Experience',
+    carModel: 'Multi-Utility Vehicle (MUV)',
     rating: 5,
-    date: '3 weeks ago',
-    comment: 'Had a bad scratch on the passenger door and fender. The single-panel DuPont booth paint job matched the midnight black factory finish 100%. No color distortion, zero orange peel texture. Impeccable craftsmanship.',
-    serviceUsed: 'Denting & Painting',
-    verified: true
+    ratingScore: '5.0',
+    date: 'Recent Visit',
+    comment: 'They used genuine spare parts and calibrated equipment. Clear billing, no unnecessary recommendations, and honest advice from an owner with 15+ years of real experience.',
+    serviceCategory: 'Genuine Spare Parts & Mechanical'
   },
   {
     id: 'rev-5',
-    name: 'Manish Goswami',
-    carModel: 'Toyota Fortuner 4x4',
-    city: 'Guwahati',
-    rating: 5,
-    date: '1 month ago',
-    comment: 'Needed a dead battery replaced at 7:30 in the morning before catching a flight. Their SOS tech arrived in 25 minutes, tested the alternator, and installed a fresh Amaron battery with digital warranty. Lifesavers!',
-    serviceUsed: 'Batteries & Jumpstart',
-    verified: true
+    name: 'Customer Experience',
+    carModel: 'Compact Sedan',
+    rating: 4,
+    ratingScore: '4.0',
+    date: 'Recent Visit',
+    comment: 'Prompt response when I reached out for urgent assistance. The technicians checked the vehicle systematically and delivered it back in smooth driving condition.',
+    serviceCategory: 'All Car Works & Maintenance'
   }
 ];

@@ -118,29 +118,30 @@ export default function SupportChatWidget() {
 
   return (
     <>
-      {/* Floating Chat Trigger Button */}
+      {/* Floating Chat Trigger Button - Clears mobile bottom action bar */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="fixed bottom-6 right-6 z-40 w-14 h-14 rounded-full bg-rose-600 text-white shadow-xl hover:bg-rose-700 hover:scale-105 active:scale-95 transition-all flex items-center justify-center glow-primary"
-        title="SR Multi Car Tech Assistant"
+        className="fixed bottom-20 md:bottom-6 right-4 md:right-6 z-40 w-13 h-13 sm:w-14 sm:h-14 rounded-full bg-red-600 text-white shadow-xl hover:bg-red-700 hover:scale-105 active:scale-95 transition-all flex items-center justify-center glow-red"
+        title="SR Multicartech Support"
+        aria-label="Toggle Support Chat"
       >
         {isOpen ? <X className="w-6 h-6" /> : <MessageSquare className="w-6 h-6" />}
       </button>
 
       {/* Chat Popover Window */}
       {isOpen && (
-        <div className="fixed bottom-24 right-4 sm:right-6 z-40 w-[92vw] sm:w-96 bg-white rounded-2xl shadow-2xl border border-slate-200 overflow-hidden flex flex-col h-[520px] animate-in slide-in-from-bottom-5 duration-200">
+        <div className="fixed bottom-36 md:bottom-24 right-4 sm:right-6 z-40 w-[92vw] sm:w-96 bg-white rounded-2xl shadow-2xl border border-slate-200 overflow-hidden flex flex-col h-[500px] animate-in slide-in-from-bottom-5 duration-200">
           {/* Header */}
-          <div className="bg-gradient-to-r from-rose-600 to-rose-700 text-white p-4 flex items-center justify-between shadow-sm">
+          <div className="bg-gradient-to-r from-red-600 to-red-700 text-white p-4 flex items-center justify-between shadow-sm">
             <div className="flex items-center gap-3">
               <div className="w-9 h-9 rounded-full bg-white/20 flex items-center justify-center font-bold text-sm">
                 <Bot className="w-5 h-5" />
               </div>
               <div>
-                <div className="font-bold text-sm leading-tight">SR Multi Car Tech Support</div>
-                <div className="text-[11px] text-rose-100 flex items-center gap-1">
+                <div className="font-bold text-sm leading-tight">SR Multicartech Support</div>
+                <div className="text-[11px] text-red-100 flex items-center gap-1">
                   <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-                  Online • AI Assistant Ready
+                  Online • Satrampadu Garage Desk
                 </div>
               </div>
             </div>

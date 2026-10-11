@@ -1,106 +1,110 @@
+'use client';
+
 import React from 'react';
 import {
-  Users,
-  BadgePercent,
-  ShieldCheck,
-  FileCheck2,
   Award,
-  Smartphone,
-  Truck,
-  Home,
-  Activity,
-  Headphones
+  Users,
+  Cpu,
+  Zap,
+  ShieldCheck,
+  Sparkles,
+  Layers,
+  HeartHandshake,
+  CheckCircle2
 } from 'lucide-react';
 
 export default function WhyChooseUs() {
-  const trustPoints = [
+  const benefits = [
     {
-      icon: <Users className="w-5 h-5" />,
-      title: 'Experienced Technicians',
-      desc: 'Factory-trained master diagnostic mechanics with over 8+ years of hands-on experience.'
+      icon: <Award className="w-5 h-5 text-red-600" />,
+      title: '15+ Years Owner Experience',
+      desc: 'Founded and personally guided by BRR with extensive hands-on mastery in multi-brand car diagnostics and mechanics.'
     },
     {
-      icon: <BadgePercent className="w-5 h-5" />,
-      title: 'Transparent Pricing',
-      desc: '100% upfront estimates with zero hidden extras or unauthorized part replacements.'
+      icon: <Users className="w-5 h-5 text-red-600" />,
+      title: '5+ Years Experienced Technicians',
+      desc: 'Our workshop mechanics bring years of hands-on technical proficiency across engine, chassis, and electronic repairs.'
     },
     {
-      icon: <ShieldCheck className="w-5 h-5" />,
-      title: '100% Genuine Parts',
-      desc: 'Only authentic OEM/OES certified spares, synthetic lubricants, and sealed filters.'
+      icon: <Cpu className="w-5 h-5 text-red-600" />,
+      title: 'Advanced Automotive Technology',
+      desc: 'State-of-the-art diagnostic gadgets and testing instruments ensuring fast, accurate troubleshooting.'
     },
     {
-      icon: <FileCheck2 className="w-5 h-5" />,
-      title: '50-Point Quality Inspection',
-      desc: 'Every car undergoes a stringent multi-point checklist with digital health report.'
+      icon: <Zap className="w-5 h-5 text-red-600" />,
+      title: 'German Technology / Software',
+      desc: 'Advanced software decoding onboard ECU data buses to identify faults without trial-and-error guesswork.'
     },
     {
-      icon: <Award className="w-5 h-5" />,
-      title: 'Service Warranty',
-      desc: 'Up to 2 years warranty on body paint and 1000 km warranty on periodic services.'
+      icon: <ShieldCheck className="w-5 h-5 text-red-600" />,
+      title: 'Genuine Spare Parts',
+      desc: 'We strictly fit authentic OEM and certified replacement parts to protect vehicle performance and warranty.'
     },
     {
-      icon: <Smartphone className="w-5 h-5" />,
-      title: 'Convenient Online Booking',
-      desc: 'Reserve a service slot in under 60 seconds with instant booking ID and schedule confirmation.'
+      icon: <Sparkles className="w-5 h-5 text-red-600" />,
+      title: 'Premium Quality Workmanship',
+      desc: 'From micron-level paint booths to calibrated engine torque specs, our focus is accuracy and durability.'
     },
     {
-      icon: <Truck className="w-5 h-5" />,
-      title: 'Free Pickup & Drop',
-      desc: 'Complimentary doorstep valet service across all major residential and corporate zones.'
+      icon: <Layers className="w-5 h-5 text-red-600" />,
+      title: 'Comprehensive Car Services',
+      desc: 'Denting, painting, mechanical overhaul, detailing, anti-rust, and electrical works all under one roof.'
     },
     {
-      icon: <Home className="w-5 h-5" />,
-      title: 'Doorstep Service',
-      desc: 'Mobile van equipped with pressure cleaners, oil suction, and battery testers for on-site care.'
-    },
-    {
-      icon: <Activity className="w-5 h-5" />,
-      title: 'Digital Service Tracking',
-      desc: 'Track vehicle arrival, live inspection photos, parts fitted, and test drive in real time.'
-    },
-    {
-      icon: <Headphones className="w-5 h-5" />,
-      title: 'Dedicated Customer Support',
-      desc: 'Assigned service advisor available over direct call and WhatsApp throughout the job.'
+      icon: <HeartHandshake className="w-5 h-5 text-red-600" />,
+      title: 'Customer-Focused Service',
+      desc: 'Direct communication, transparent estimates, and sincere recommendations you can rely on.'
     }
   ];
 
   return (
-    <section className="py-20 bg-slate-50 border-b border-slate-200">
+    <section className="py-16 sm:py-20 md:py-24 bg-slate-50 text-slate-900 border-b border-slate-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
-        <div className="text-center max-w-3xl mx-auto mb-14">
-          <span className="text-xs font-bold uppercase tracking-wider text-rose-600 bg-rose-50 px-3 py-1 rounded-full border border-rose-100">
-            Uncompromising Standards
-          </span>
-          <h2 className="text-3xl sm:text-4xl font-black text-slate-900 tracking-tight mt-3">
-            Why Choose SR Multi Car Tech?
+        
+        {/* Section Header */}
+        <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-14">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-red-100 text-red-700 text-xs font-bold uppercase tracking-wider mb-3">
+            <span>The SR Multicartech Advantage</span>
+          </div>
+
+          <h2 className="text-2xl sm:text-4xl md:text-5xl font-extrabold text-slate-950 tracking-tight">
+            Why Choose SR Multicartech
           </h2>
-          <p className="text-sm sm:text-base text-slate-600 mt-2">
-            Built from the ground up to eliminate dishonest quotes, poor workmanship, and inconvenient workshop visits.
+
+          <p className="text-sm sm:text-base text-slate-600 mt-2.5 leading-relaxed">
+            We bridge deep industry experience with modern automotive technology to deliver premium care with complete transparency.
           </p>
         </div>
 
-        {/* 10 Trust Cards Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
-          {trustPoints.map((item, index) => (
+        {/* 8 Benefits Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+          {benefits.map((benefit, idx) => (
             <div
-              key={index}
-              className="p-5 rounded-2xl bg-white border border-slate-200/80 shadow-sm hover:shadow-md hover:border-rose-200 hover:-translate-y-1 transition-all duration-200"
+              key={idx}
+              className="p-5 sm:p-6 rounded-2xl bg-white border border-slate-200 shadow-sm flex flex-col justify-between"
             >
-              <div className="w-10 h-10 rounded-xl bg-rose-50 text-rose-600 flex items-center justify-center mb-3">
-                {item.icon}
+              <div>
+                <div className="w-10 h-10 rounded-xl bg-red-50 border border-red-100 flex items-center justify-center mb-4">
+                  {benefit.icon}
+                </div>
+
+                <h3 className="text-base font-bold text-slate-950 tracking-tight mb-1.5">
+                  {benefit.title}
+                </h3>
+
+                <p className="text-xs text-slate-600 leading-relaxed">
+                  {benefit.desc}
+                </p>
               </div>
-              <h3 className="text-sm font-bold text-slate-900 mb-1">
-                {item.title}
-              </h3>
-              <p className="text-xs text-slate-500 leading-relaxed">
-                {item.desc}
-              </p>
+
+              <div className="mt-4 pt-3 border-t border-slate-100 flex items-center gap-1.5 text-[11px] font-bold text-red-600">
+                <CheckCircle2 className="w-3.5 h-3.5" />
+                <span>Verified Standard</span>
+              </div>
             </div>
           ))}
         </div>
+
       </div>
     </section>
   );
